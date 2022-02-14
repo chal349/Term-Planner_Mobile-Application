@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0F7FA"
+    tools:context=".UI.MainMenuActivity">
+
+
+    <Button
+        android:id="@+id/coursesBtn"
+        android:layout_width="384dp"
+        android:layout_height="96dp"
+        android:layout_marginBottom="248dp"
+        android:backgroundTint="#0D47A1"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termsBtn"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <Button
+        android:id="@+id/termsBtn"
+        android:layout_width="384dp"
+        android:layout_height="96dp"
+        android:layout_marginBottom="324dp"
+        android:backgroundTint="#1A237E"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/assessmentsBtn"
+        android:layout_width="384dp"
+        android:layout_height="96dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#1565C0"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coursesBtn"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="351dp"
+        android:layout_height="262dp"
+        android:rotation="-180"
+        app:layout_constraintBottom_toTopOf="@+id/termsBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.734"
+        app:srcCompat="@drawable/ic_baseline_subtitles_24" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

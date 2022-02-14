@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.TermAddActivity"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_dark_background"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/termTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="100dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="TERM NAME"
+                android:textColorHint="#FFFFFF"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:ellipsize="start" />
+
+            <EditText
+                android:id="@+id/startDate"
+                android:layout_width="match_parent"
+                android:ems="10"
+                android:layout_height="40dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/teal_700"
+                android:hint="START DATE"
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:layout_centerInParent="true"
+                android:ellipsize="start"
+                android:gravity="center"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/endDate"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginBottom="16dp"
+                android:layout_centerInParent="true"
+                android:background="@color/teal_700"
+                android:ellipsize="start"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="END DATE"
+                android:inputType="date"
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="358dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+        <Button
+            android:id="@+id/cancel_term_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/teal_700"
+            android:layout_marginRight="4dp"
+            android:text="CANCEL" />
+
+        <Button
+            android:id="@+id/save_term_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="saveTerm"
+            android:backgroundTint="@color/teal_700"
+            android:layout_marginLeft="4dp"
+            android:text="SAVE" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
