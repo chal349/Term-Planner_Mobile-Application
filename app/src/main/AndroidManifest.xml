@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TermPlanner" >
         <activity
-            android:name=".UI.CourseDetailActivity"
+            android:name=".UI.CourseDetailsActivity"
             android:exported="false"
             android:parentActivityName=".UI.CourseActivity"/>
+        <activity
+            android:name=".UI.CourseAddActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.CourseActivity" />
         <activity
             android:name=".UI.AssessmentActivity"
             android:exported="false"

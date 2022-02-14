@@ -5,11 +5,11 @@
     android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.CourseAddActivity"
+    tools:context=".UI.CourseDetailsActivity"
     >
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/cardView3"
         android:layout_width="match_parent"
         android:layout_height="336dp"
         android:layout_marginStart="24dp"
@@ -32,7 +32,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/courseName"
+                    android:id="@+id/courseDetailsName"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:ems="10"
@@ -46,42 +46,42 @@
                     android:ellipsize="start"/>
             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <EditText
-                android:id="@+id/courseStartDate"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/teal_700"
-                android:ellipsize="start"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="START DATE"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:inputType="date"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
 
-            <EditText
-                android:id="@+id/courseEndDate"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/teal_700"
-                android:ellipsize="start"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="center"
-                android:layout_marginLeft="4dp"
-                android:hint="END DATE"
-                android:inputType="date"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/courseDetailsStartDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/teal_700"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="START DATE"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:inputType="date"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/courseDetailsEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/teal_700"
+                    android:ellipsize="start"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:hint="END DATE"
+                    android:inputType="date"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,7 +90,7 @@
                 android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/courseStatus"
+                    android:id="@+id/courseDetailsStatus"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:ems="10"
@@ -105,7 +105,7 @@
                     android:ellipsize="start"/>
 
                 <Spinner
-                    android:id="@+id/statusSpinner"
+                    android:id="@+id/statusDetailsSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:layout_weight="1"
@@ -121,7 +121,7 @@
                 android:padding="8dp">
 
                 <CheckBox
-                    android:id="@+id/optionalNote"
+                    android:id="@+id/optionalDetailsNoteCheckBox"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginRight="4dp"
@@ -137,7 +137,7 @@
                     android:textColorHint="#FFFFFF" />
 
                 <EditText
-                    android:id="@+id/courseNotes"
+                    android:id="@+id/courseDetailsNotes"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_weight="1"
@@ -155,7 +155,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/instructorName"
+                    android:id="@+id/instructorNameCourseDetails"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:ems="10"
@@ -175,7 +175,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/instructorEmail"
+                    android:id="@+id/instructorEmailCourseDetails"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:ems="10"
@@ -195,7 +195,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/instructorPhone"
+                    android:id="@+id/instructorPhoneCourseDetails"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:ems="10"
@@ -212,10 +212,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-
-
-
-
     <LinearLayout
         android:layout_width="358dp"
         android:layout_height="71dp"
@@ -225,10 +221,10 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
         <Button
-            android:id="@+id/cancel_course_button"
+            android:id="@+id/cancel_course_details_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -237,11 +233,11 @@
             android:text="CANCEL" />
 
         <Button
-            android:id="@+id/save_course_button"
+            android:id="@+id/save_course_details_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="saveCourse"
+            android:onClick="saveCourseDetails"
             android:backgroundTint="@color/teal_700"
             android:layout_marginLeft="4dp"
             android:text="SAVE" />

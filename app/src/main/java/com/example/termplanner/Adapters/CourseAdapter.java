@@ -1,13 +1,10 @@
 package com.example.termplanner.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,13 +12,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.termplanner.Entities.Course;
-import com.example.termplanner.Entities.Term;
 import com.example.termplanner.R;
-import com.example.termplanner.UI.CourseActivity;
-import com.example.termplanner.UI.CourseDetailActivity;
 import com.example.termplanner.UI.TermDetailsActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
