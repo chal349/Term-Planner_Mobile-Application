@@ -33,12 +33,12 @@ public class TermAddActivity extends AppCompatActivity {
 
     DatePickerDialog.OnDateSetListener dateStartClick;
     DatePickerDialog.OnDateSetListener dateEndClick;
-    Long date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_term);
+        getSupportActionBar().setTitle("Add Term");
 
         repository = new Repository(getApplication());
         termName = findViewById(R.id.termTitle);

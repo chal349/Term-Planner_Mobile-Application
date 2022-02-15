@@ -126,7 +126,7 @@
                     android:layout_height="40dp"
                     android:layout_marginRight="4dp"
                     android:layout_weight="2"
-                    android:checked="true"
+                    android:checked="false"
                     android:ellipsize="start"
                     android:ems="10"
                     android:gravity="right|center_vertical"
@@ -139,8 +139,8 @@
                 <EditText
                     android:id="@+id/courseNotes"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:layout_weight="1.5"
                     android:layout_marginLeft="4dp"
                     android:background="@color/cardview_light_background"
                     android:ems="10"
@@ -149,7 +149,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

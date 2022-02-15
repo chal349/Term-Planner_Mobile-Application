@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 public class Course {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int courseId;
 
     private String title;
     private String startDate;
@@ -16,10 +16,13 @@ public class Course {
     private String instructorName;
     private String instructorPhone;
     private String instructorEmail;
-    private String noteTitle;
     private String noteContent;
+    private int termId;
 
-    public Course(String title, String startDate, String endDate, String status, String instructorName, String instructorPhone, String instructorEmail, String noteTitle, String noteContent) {
+
+
+    public Course(int courseId, String title, String startDate, String endDate, String status, String instructorName, String instructorPhone, String instructorEmail, String noteContent, int termId) {
+        this.courseId = courseId;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -27,16 +30,23 @@ public class Course {
         this.instructorName = instructorName;
         this.instructorPhone = instructorPhone;
         this.instructorEmail = instructorEmail;
-        this.noteTitle = noteTitle;
         this.noteContent = noteContent;
+        this.termId = termId;
     }
 
-    public int getId() {
-        return id;
+    public int getTermId() {
+        return termId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTermId(int termId) {
+        this.termId = termId;
+    }
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int id) {
+        this.courseId = id;
     }
 
     public String getTitle() {
@@ -93,14 +103,6 @@ public class Course {
 
     public void setInstructorEmail(String instructorEmail) {
         this.instructorEmail = instructorEmail;
-    }
-
-    public String getNoteTitle() {
-        return noteTitle;
-    }
-
-    public void setNoteTitle(String noteTitle) {
-        this.noteTitle = noteTitle;
     }
 
     public String getNoteContent() {

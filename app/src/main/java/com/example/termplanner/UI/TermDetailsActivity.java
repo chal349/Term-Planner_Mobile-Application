@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.termplanner.Entities.Term;
 import com.example.termplanner.R;
 import com.example.termplanner.Repository.Repository;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -120,10 +122,12 @@ public class TermDetailsActivity extends AppCompatActivity{
     }
 
     public void saveTermDetails(View view) {
+        int id = termId;
         String name = termName.getText().toString();
         String start = startDate.getText().toString();
         String end = endDate.getText().toString();
-        Term newTerm;
+        //   int termID = termId;
+        Term updateTerm;
 
         if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty()) {
 
@@ -140,21 +144,19 @@ public class TermDetailsActivity extends AppCompatActivity{
             alertDialog.show();
 
         } else {
-
             List<Term> allTerms = repository.getAllTerms();
-            int termsList = allTerms.size();
+            id = allTerms.get(allTerms.size() - 1).getTermId();
 
-            newTerm = new Term(termId, name, start, end);
-
-            repository.insert(newTerm);
-
+            updateTerm = new Term(id, name, start, end);
+            repository.update(updateTerm);
             Intent intent = new Intent(TermDetailsActivity.this, TermActivity.class);
             startActivity(intent);
-
         }
+
     }
 
     public void AddCourse(View view) {
+        startActivity(new Intent(TermDetailsActivity.this, CourseAddActivity.class));
     }
 
 }

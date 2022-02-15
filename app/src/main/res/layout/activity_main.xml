@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0F7FA"
+    android:background="@color/black"
     tools:context=".UI.MainMenuActivity">
 
 
     <Button
         android:id="@+id/coursesBtn"
-        android:layout_width="384dp"
+        android:layout_width="match_parent"
         android:layout_height="96dp"
         android:layout_marginBottom="248dp"
-        android:backgroundTint="#0D47A1"
+        android:backgroundTint="#00695C"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -29,10 +29,10 @@
 
     <Button
         android:id="@+id/termsBtn"
-        android:layout_width="384dp"
+        android:layout_width="match_parent"
         android:layout_height="96dp"
         android:layout_marginBottom="324dp"
-        android:backgroundTint="#1A237E"
+        android:backgroundTint="@color/teal_700"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -45,10 +45,10 @@
 
     <Button
         android:id="@+id/assessmentsBtn"
-        android:layout_width="384dp"
+        android:layout_width="match_parent"
         android:layout_height="96dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#1565C0"
+        android:backgroundTint="#004D40"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -72,7 +72,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.734"
-        app:srcCompat="@drawable/ic_baseline_subtitles_24" />
+        app:srcCompat="@drawable/ic_baseline_subtitles_24"
+        app:tint="@color/cardview_dark_background" />
 
 
 

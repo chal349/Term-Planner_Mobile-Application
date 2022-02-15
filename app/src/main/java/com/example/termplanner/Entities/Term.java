@@ -3,6 +3,7 @@ package com.example.termplanner.Entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "term_table")
@@ -11,6 +12,7 @@ public class Term {
 
     @PrimaryKey(autoGenerate = true)
     private int termId;
+
     private String title;
     private String startDate;
     private String endDate;

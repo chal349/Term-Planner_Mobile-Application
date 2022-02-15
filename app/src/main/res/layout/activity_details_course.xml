@@ -139,8 +139,8 @@
                 <EditText
                     android:id="@+id/courseDetailsNotes"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:layout_weight="1.5"
                     android:layout_marginLeft="4dp"
                     android:background="@color/cardview_light_background"
                     android:ems="10"
@@ -149,7 +149,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -208,7 +208,6 @@
                     android:layout_centerInParent="true"
                     android:ellipsize="start"/>
             </LinearLayout>
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
