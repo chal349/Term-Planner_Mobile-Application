@@ -32,12 +32,12 @@
                 android:text="Course Name"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"
-                app:layout_constraintBottom_toTopOf="@+id/course_date"
+                app:layout_constraintBottom_toTopOf="@+id/course_list_date"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/course_date"
+                android:id="@+id/course_list_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"

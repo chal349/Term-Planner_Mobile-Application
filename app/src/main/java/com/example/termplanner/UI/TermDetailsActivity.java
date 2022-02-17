@@ -10,12 +10,19 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.termplanner.Adapters.CourseAdapter;
+import com.example.termplanner.Adapters.TermAdapter;
+import com.example.termplanner.Entities.Course;
 import com.example.termplanner.Entities.Term;
 import com.example.termplanner.R;
 import com.example.termplanner.Repository.Repository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -23,6 +30,10 @@ import java.util.Locale;
 public class TermDetailsActivity extends AppCompatActivity{
     private Repository repository;
     static int tempId;
+    static String tempTitle;
+    static String tempStart;
+    static String tempEnd;
+    static int coursesInTermCount;
     int termId;
     EditText termName;
     EditText startDate;
@@ -49,15 +60,36 @@ public class TermDetailsActivity extends AppCompatActivity{
 
         // GET INTENTS FROM PREVIOUS SCREEN
         int termID = getIntent().getIntExtra("termId", -1);
+        tempId = termID;
         String termTitle = getIntent().getStringExtra("title");
+        tempTitle = termTitle;
         String termStartDate = getIntent().getStringExtra("startDate");
+        tempStart = termStartDate;
         String termEndDate = getIntent().getStringExtra("endDate");
+        tempEnd = termEndDate;
 
-        if (termID != -1) {
+  //      if (termID != -1) {
             termName.setText(termTitle);
             startDate.setText(termStartDate);
             endDate.setText(termEndDate);
+    //    }
+
+        repository = new Repository(getApplication());
+        List<Course> coursesInTerm = new ArrayList<>();
+
+        RecyclerView recyclerView = findViewById(R.id.term_with_courses_recycler);
+
+        final CourseAdapter courseAdapter = new CourseAdapter(this);
+        recyclerView.setAdapter(courseAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        for(Course course : repository.getAllCourses()){
+            if(course.getTermId() == tempId){
+                coursesInTerm.add(course);
+            }
         }
+        courseAdapter.setCourses(coursesInTerm);
+        coursesInTermCount = coursesInTerm.size();
+
 
         //START DATE PICKER
         dateStartClick = new DatePickerDialog.OnDateSetListener() {
@@ -122,7 +154,7 @@ public class TermDetailsActivity extends AppCompatActivity{
     }
 
     public void saveTermDetails(View view) {
-        int id = termId;
+        int id;
         String name = termName.getText().toString();
         String start = startDate.getText().toString();
         String end = endDate.getText().toString();
@@ -156,7 +188,12 @@ public class TermDetailsActivity extends AppCompatActivity{
     }
 
     public void AddCourse(View view) {
-        startActivity(new Intent(TermDetailsActivity.this, CourseAddActivity.class));
+        Intent intent = new Intent(TermDetailsActivity.this, CourseAddActivity.class);
+        intent.putExtra("termId", tempId);
+        intent.putExtra("title", tempTitle);
+        intent.putExtra("startDate", tempStart);
+        intent.putExtra("endDate", tempEnd);
+        startActivity(intent);
     }
 
 }

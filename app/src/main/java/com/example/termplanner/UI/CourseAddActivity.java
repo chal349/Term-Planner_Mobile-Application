@@ -29,6 +29,13 @@ import java.util.Locale;
 public class CourseAddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Repository repository;
     static int tempId;
+    static String tempTitle;
+    static String tempStart;
+    static String tempEnd;
+    int termId;
+    String termTitle;
+    String termStart;
+    String termEnd;
     int courseId;
     EditText courseName;
     EditText startDate;
@@ -39,9 +46,6 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     EditText instructorName;
     EditText instructorEmail;
     EditText instructorPhone;
-
-
-
     public String statusSelected;
 
     String dateFormat = "MM/dd/yyyy";
@@ -60,29 +64,41 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         getSupportActionBar().setTitle("Add Course");
 
         repository = new Repository(getApplication());
+        termId = getIntent().getIntExtra("termId", -1);
+        tempId = termId;
+        termTitle = getIntent().getStringExtra("title");
+        tempTitle = termTitle;
+        termStart = getIntent().getStringExtra("startDate");
+        tempStart = termStart;
+        termEnd = getIntent().getStringExtra("endDate");
+        tempEnd = termEnd;
+
         courseName = findViewById(R.id.courseName);
         startDate = findViewById(R.id.courseStartDate);
         endDate = findViewById(R.id.courseEndDate);
+
         //Spinner
         courseStatus = findViewById(R.id.statusSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.status, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         courseStatus.setAdapter(adapter);
         courseStatus.setOnItemSelectedListener(this);
+
         //CHECKBOX FOR NOTES
         noteOption = findViewById(R.id.optionalNote);
-        noteOption.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        courseNotes = findViewById(R.id.courseNotes);
+        courseNotes.setEnabled(false);
+        noteOption.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (noteOption.isChecked()) {
-                    courseNotes.isEnabled();
+            public void onClick(View view) {
+                if(noteOption.isChecked()){
+                    courseNotes.setEnabled(true);
                 } else {
                     courseNotes.setEnabled(false);
                 }
             }
         });
 
-        courseNotes = findViewById(R.id.courseNotes);
         instructorName = findViewById(R.id.instructorName);
         instructorEmail = findViewById(R.id.instructorEmail);
         instructorPhone = findViewById(R.id.instructorPhone);
@@ -150,38 +166,52 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void saveCourse(View view) {
-//        String name = courseName.getText().toString();
-//        String start = startDate.getText().toString();
-//        String end = endDate.getText().toString();
-//
-//
-//        if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty()) {
-//
-//            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-//            alertDialog.setTitle("Alert");
-//            alertDialog.setMessage("All fields must be completed!");
-//            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                    new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            dialogInterface.dismiss();
-//                        }
-//                    });
-//            alertDialog.show();
-//
-//        } else {
-//
+        Course newCourse;
+        String name = courseName.getText().toString();
+        String start = startDate.getText().toString();
+        String end = endDate.getText().toString();
+        String instructor = instructorName.getText().toString();
+        String phone = instructorPhone.getText().toString();
+        String email = instructorEmail.getText().toString();
+        String noteContent = courseNotes.getText().toString();
+
+        if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() ||
+            statusSelected.isEmpty() || instructor.trim().isEmpty() || phone.trim().isEmpty() ||
+            email.trim().isEmpty()) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("All fields must be completed!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+
+        } else {
+
+            if (noteContent.trim().isEmpty()) {
+                noteContent = " ";
+            }
+
 //            List<Course> allCourses = repository.getAllCourses();
 //            int coursesList = allCourses.size();
-//
-//           // newCourse = new Course(courseId, name, start, end,);
-//
-//        //    repository.insert(newTerm);
-//
-//       //     Intent intent = new Intent(TermAddActivity.this, TermActivity.class);
-//        //    startActivity(intent);
-//
-//        }
+
+            newCourse = new Course(courseId, name, start, end, statusSelected, instructor, phone, email, noteContent, tempId);
+
+            repository.insert(newCourse);
+
+            Intent intent = new Intent(CourseAddActivity.this, TermDetailsActivity.class);
+            intent.putExtra("termId", tempId);
+            intent.putExtra("title", tempTitle);
+            intent.putExtra("startDate", tempStart);
+            intent.putExtra("endDate", tempEnd);
+            startActivity(intent);
+
+        }
     }
 
     //STATUS SPINNER SELECTION
@@ -194,8 +224,6 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-
-
 
 
 }

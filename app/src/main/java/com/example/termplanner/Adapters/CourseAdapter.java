@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.termplanner.Entities.Course;
 import com.example.termplanner.R;
+import com.example.termplanner.UI.CourseDetailsActivity;
 import com.example.termplanner.UI.TermDetailsActivity;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView title;
         private final TextView date;
+
      //   private final status;
      //   private String instructorName;
      //   private String instructorPhone;
@@ -31,8 +33,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
         private ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.term_list_title);
-            date = itemView.findViewById(R.id.term_date);
+            title = itemView.findViewById(R.id.course_list_title);
+            date = itemView.findViewById(R.id.course_list_date);
 
             CardView courseListView = itemView.findViewById(R.id.course_list_view);
             courseListView.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +42,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     final Course current = courseList.get(position);
-                    Intent intent = new Intent(context, TermDetailsActivity.class);
+                    Intent intent = new Intent(context, CourseDetailsActivity.class);
                     intent.putExtra("title", current.getTitle());
                     intent.putExtra("startDate", current.getStartDate());
                     intent.putExtra("endDate", current.getEndDate());
