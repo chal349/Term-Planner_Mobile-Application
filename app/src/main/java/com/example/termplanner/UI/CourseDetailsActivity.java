@@ -44,7 +44,6 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
     static String tempStart;
     static String tempEnd;
     static String tempSpinner;
-    static CheckBox tempChecked;
     static String tempNotes;
     static String tempInstructorName;
     static String tempInstructorEmail;
@@ -94,7 +93,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         instructorEmail = findViewById(R.id.instructorEmailCourseDetails);
         instructorPhone = findViewById(R.id.instructorPhoneCourseDetails);
 
-        // GET INTENTS FROM PREVIOUS SCREEN
+        // GET INTENTS AND CREATE TEMP DATA TO PASS TO ASSESSMENTS ACTIVITY IF NEEDED
         int courseId = getIntent().getIntExtra("courseId", -1);
         tempId = courseId;
         String courseTitle = getIntent().getStringExtra("title");
@@ -154,9 +153,6 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         instructorEmail.setText(email);
         instructorPhone.setText(phone);
 
-
-
-
 //        repository = new Repository(getApplication());
 //        List<Assessment> assessmentsInCourse = new ArrayList<>();
 //
@@ -172,15 +168,6 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 //        }
 //        courseAdapter.setCourses(assessmentsInCourse);
 //        coursesInTermCount = coursesInTerm.size();
-
-
-
-
-
-
-
-
-
 
 
         //START DATE PICKER
@@ -257,6 +244,8 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
     }
 
 
+
+
 //    public void saveCourseDetails(View view) {
 //        int id;
 //        String name = courseName.getText().toString();
@@ -291,14 +280,14 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 //
 //    }
 
-//    public void AddCourse(View view) {
-//        Intent intent = new Intent(CourseDetailsActivity.this, CourseAddActivity.class);
-//        intent.putExtra("termId", tempId);
-//        intent.putExtra("title", tempTitle);
-//        intent.putExtra("startDate", tempStart);
-//        intent.putExtra("endDate", tempEnd);
-//        startActivity(intent);
-//    }
+    public void AddAssessment(View view) {
+        Intent intent = new Intent(CourseDetailsActivity.this, CourseAddActivity.class);
+        intent.putExtra("termId", tempId);
+        intent.putExtra("title", tempTitle);
+        intent.putExtra("startDate", tempStart);
+        intent.putExtra("endDate", tempEnd);
+        startActivity(intent);
+    }
 
 
 }

@@ -36,7 +36,7 @@
                 android:ellipsize="start"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="TAACO Name"
+                android:hint="Term Name"
                 android:inputType="textPersonName"
                 android:text=""
                 android:textColor="#FFFFFF"
@@ -82,15 +82,16 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
-        android:layout_width="358dp"
-        android:layout_height="71dp"
+        android:id="@+id/delete_save_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="32dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termDetailsCardView">
 
         <Button
             android:id="@+id/cancel_term_details_button"
@@ -115,16 +116,14 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="340dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="104dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_course_button">
+        app:layout_constraintTop_toBottomOf="@id/delete_save_group">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/term_with_courses_recycler"
@@ -135,19 +134,29 @@
             tools:listitem="@layout/list_course" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/add_course_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/teal_700"
-        android:onClick="AddCourse"
-        android:text="ADD COURSE"
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termDetailsCardView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <Button
+            android:id="@+id/addCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="100dp"
+            android:layout_weight="1"
+            android:onClick="AddCourse"
+            android:text="ADD COURSE" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
