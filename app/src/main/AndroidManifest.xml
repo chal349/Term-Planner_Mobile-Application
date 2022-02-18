@@ -24,7 +24,6 @@
         <activity
             android:name=".UI.CourseActivity"
             android:exported="false"
-            android:launchMode="singleTop"
             android:parentActivityName=".UI.MainMenuActivity" />
         <activity
             android:name=".UI.TermAddActivity"

@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class Assessment {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int assessmentId;
 
     private int courseId;
     private String title;
@@ -25,12 +25,12 @@ public class Assessment {
         this.endDate = endDate;
     }
 
-    public int getId() {
-        return id;
+    public int getAssessmentId() {
+        return assessmentId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAssessmentId(int id) {
+        this.assessmentId = id;
     }
 
     public int getCourseId() {

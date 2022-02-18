@@ -22,7 +22,6 @@ public class TermActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-      //  AddTermActivity.tempId = -1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term);
         getSupportActionBar().setTitle("Terms");

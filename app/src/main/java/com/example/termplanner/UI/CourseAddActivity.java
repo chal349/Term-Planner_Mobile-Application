@@ -46,7 +46,8 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     EditText instructorName;
     EditText instructorEmail;
     EditText instructorPhone;
-    public String statusSelected;
+    public String status;
+    int statusSelected;
 
     String dateFormat = "MM/dd/yyyy";
     SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
@@ -95,6 +96,7 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
                     courseNotes.setEnabled(true);
                 } else {
                     courseNotes.setEnabled(false);
+                    courseNotes.setText(" ");
                 }
             }
         });
@@ -176,7 +178,7 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         String noteContent = courseNotes.getText().toString();
 
         if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() ||
-            statusSelected.isEmpty() || instructor.trim().isEmpty() || phone.trim().isEmpty() ||
+            status.isEmpty() || instructor.trim().isEmpty() || phone.trim().isEmpty() ||
             email.trim().isEmpty()) {
 
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -193,14 +195,7 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
 
         } else {
 
-            if (noteContent.trim().isEmpty()) {
-                noteContent = " ";
-            }
-
-//            List<Course> allCourses = repository.getAllCourses();
-//            int coursesList = allCourses.size();
-
-            newCourse = new Course(courseId, name, start, end, statusSelected, instructor, phone, email, noteContent, tempId);
+            newCourse = new Course(courseId, name, start, end, status, statusSelected, instructor, phone, email, noteContent, tempId);
 
             repository.insert(newCourse);
 
@@ -217,7 +212,8 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     //STATUS SPINNER SELECTION
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        statusSelected = parent.getItemAtPosition(position).toString();
+        status = parent.getItemAtPosition(position).toString();
+        statusSelected = parent.getSelectedItemPosition();
     }
 
     @Override

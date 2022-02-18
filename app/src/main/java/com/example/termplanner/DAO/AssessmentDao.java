@@ -23,7 +23,7 @@ public interface AssessmentDao {
     @Delete
     void delete(Assessment assessment);
 
-    @Query("SELECT * FROM assessments_table ORDER BY id ASC")
+    @Query("SELECT * FROM assessments_table ORDER BY assessmentId ASC")
     List<Assessment> getAllAssessments();
 
     @Query("DELETE FROM assessments_table")

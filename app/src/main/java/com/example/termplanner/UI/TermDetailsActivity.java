@@ -34,7 +34,6 @@ public class TermDetailsActivity extends AppCompatActivity{
     static String tempStart;
     static String tempEnd;
     static int coursesInTermCount;
-    int termId;
     EditText termName;
     EditText startDate;
     EditText endDate;

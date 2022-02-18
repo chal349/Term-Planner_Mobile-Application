@@ -9,7 +9,7 @@
     tools:context=".UI.CourseActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="124dp"
@@ -26,20 +26,5 @@
             tools:listitem="@layout/list_course" />
     </LinearLayout>
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_add_term"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="32dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="48dp"
-
-        android:src="@drawable/ic_add"
-        app:backgroundTint="#008A87"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

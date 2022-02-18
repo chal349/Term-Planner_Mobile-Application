@@ -13,6 +13,7 @@ public class Course {
     private String startDate;
     private String endDate;
     private String status;
+    private int statusSelection;
     private String instructorName;
     private String instructorPhone;
     private String instructorEmail;
@@ -21,18 +22,20 @@ public class Course {
 
 
 
-    public Course(int courseId, String title, String startDate, String endDate, String status, String instructorName, String instructorPhone, String instructorEmail, String noteContent, int termId) {
+    public Course(int courseId, String title, String startDate, String endDate, String status, int statusSelection,  String instructorName, String instructorPhone, String instructorEmail, String noteContent, int termId) {
         this.courseId = courseId;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
+        this.statusSelection = statusSelection;
         this.instructorName = instructorName;
         this.instructorPhone = instructorPhone;
         this.instructorEmail = instructorEmail;
         this.noteContent = noteContent;
         this.termId = termId;
     }
+
 
     public int getTermId() {
         return termId;
@@ -41,6 +44,7 @@ public class Course {
     public void setTermId(int termId) {
         this.termId = termId;
     }
+
     public int getCourseId() {
         return courseId;
     }
@@ -79,6 +83,14 @@ public class Course {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getStatusSelection() {
+        return statusSelection;
+    }
+
+    public void setStatusSelection(int statusSelection) {
+        this.statusSelection = statusSelection;
     }
 
     public String getInstructorName() {
