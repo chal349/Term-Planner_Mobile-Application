@@ -1,5 +1,8 @@
 package com.example.termplanner.UI;
 
+import static com.example.termplanner.UI.TermDetailsActivity.tempId;
+import static com.example.termplanner.UI.TermDetailsActivity.tempStart;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,10 +42,15 @@ import java.util.Locale;
 public class CourseDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Repository repository;
-    static int tempId;
-    static String tempTitle;
-    static String tempStart;
-    static String tempEnd;
+    Course selectedCourse;
+    static int tempCourseId;
+    static int tempTermId;
+    public static String tempTermTitle;
+    public static String tempTermStart;
+    public static String tempTermEnd;
+    static String tempCourseTitle;
+    static String tempCourseStart;
+    static String tempCourseEnd;
     static String tempSpinner;
     static String tempNotes;
     static String tempInstructorName;
@@ -53,6 +61,12 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
     static int assessmentsInCourseCount;
 
     int courseId;
+    int termId;
+    String termTitle;
+    String termStart;
+    String termEnd;
+
+
     String spinnerValue;
     int spinnerSelectionPosition;
     public String statusSelected;
@@ -83,6 +97,10 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         setContentView(R.layout.activity_details_course);
         getSupportActionBar().setTitle("Course Details");
 
+        repository = new Repository(getApplication());
+
+
+
         courseName = findViewById(R.id.courseDetailsName);
         startDate = findViewById(R.id.courseDetailsStartDate);
         endDate = findViewById(R.id.courseDetailsEndDate);
@@ -94,15 +112,33 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         instructorPhone = findViewById(R.id.instructorPhoneCourseDetails);
 
         // GET INTENTS AND CREATE TEMP DATA TO PASS TO ASSESSMENTS ACTIVITY IF NEEDED
-        int courseId = getIntent().getIntExtra("courseId", -1);
-        tempId = courseId;
-        String courseTitle = getIntent().getStringExtra("title");
-        tempTitle = courseTitle;
-        String courseStartDate = getIntent().getStringExtra("startDate");
-        tempStart = courseStartDate;
-        String courseEndDate = getIntent().getStringExtra("endDate");
-        tempEnd = courseEndDate;
-        spinnerValue = getIntent().getStringExtra("status");
+        courseId = getIntent().getIntExtra("courseId", -1);
+        tempCourseId = courseId;
+        List<Course> allCourses = repository.getAllCourses();
+        for (Course course : allCourses) {
+            if (course.getCourseId() == courseId) {
+                selectedCourse = course;
+            }
+        }
+
+
+        termId = getIntent().getIntExtra("termId", -1 );
+        tempTermId = termId;
+        termTitle = getIntent().getStringExtra("termTitle");
+        tempTermTitle = termTitle;
+        termStart = getIntent().getStringExtra("termStartDate");
+        tempTermStart = termStart;
+        termEnd = getIntent().getStringExtra("termEndDate");
+        tempTermEnd = termEnd;
+
+
+        String courseTitle = getIntent().getStringExtra("courseTitle");
+        tempCourseTitle = courseTitle;
+        String courseStartDate = getIntent().getStringExtra("courseStartDate");
+        tempCourseStart = courseStartDate;
+        String courseEndDate = getIntent().getStringExtra("courseEndDate");
+        tempCourseEnd = courseEndDate;
+        spinnerValue = getIntent().getStringExtra("courseStatus");
         spinnerSelectionPosition = getIntent().getIntExtra("courseStatusSelection", -1);
         tempSpinner = spinnerValue;
 
@@ -113,7 +149,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         courseStatusSpinner.setOnItemSelectedListener(this);
 
 
-        String notes = getIntent().getStringExtra("notes");
+        String notes = getIntent().getStringExtra("courseNotes");
         tempNotes = notes;
         courseNotes.setEnabled(false);
         noteOption.setChecked(true);
@@ -153,21 +189,12 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         instructorEmail.setText(email);
         instructorPhone.setText(phone);
 
-//        repository = new Repository(getApplication());
-//        List<Assessment> assessmentsInCourse = new ArrayList<>();
+
 //
-//        RecyclerView recyclerView = findViewById(R.id.);
 //
-//        final CourseAdapter courseAdapter = new CourseAdapter(this);
-//        recyclerView.setAdapter(courseAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        for(Assessment assessment : repository.getAllAssessments()){
-//            if(assessment.getId() == tempId){
-//                assessmentsInCourse.add(assessment);
-//            }
-//        }
-//        courseAdapter.setCourses(assessmentsInCourse);
-//        coursesInTermCount = coursesInTerm.size();
+//        *****LinearLayoutManager horizontalLayoutManager
+//                = new LinearLayoutManager(TermDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false);
+//        recyclerView.setLayoutManager(horizontalLayoutManager);
 
 
         //START DATE PICKER
@@ -220,16 +247,6 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
             }
         });
 
-        //CANCEL BUTTON
-        Button cancelTermButton = findViewById(R.id.cancel_course_details_button);
-        cancelTermButton.setText("CANCEL");
-        cancelTermButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CourseDetailsActivity.this, TermActivity.class));
-
-            }
-        });
     }
 
     @Override
@@ -244,51 +261,75 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
     }
 
 
+    public void saveCourseDetails(View view) {
+
+        Course updateCourse;
+        String name = courseName.getText().toString();
+        String start = startDate.getText().toString();
+        String end = endDate.getText().toString();
+        String instructor = instructorName.getText().toString();
+        String phone = instructorPhone.getText().toString();
+        String email = instructorEmail.getText().toString();
+        String noteContent = courseNotes.getText().toString();
 
 
-//    public void saveCourseDetails(View view) {
-//        int id;
-//        String name = courseName.getText().toString();
-//        String start = startDate.getText().toString();
-//        String end = endDate.getText().toString();
-//        //   int termID = termId;
-//        Term updateTerm;
-//
-//        if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty()) {
-//
-//            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-//            alertDialog.setTitle("Alert");
-//            alertDialog.setMessage("All fields must be completed!");
-//            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                    new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            dialogInterface.dismiss();
-//                        }
-//                    });
-//            alertDialog.show();
-//
-//        } else {
-//            List<Term> allTerms = repository.getAllTerms();
-//            id = allTerms.get(allTerms.size() - 1).getTermId();
-//
-//            updateCourse = new Course(id, name, start, end);
-//            repository.update(updateTerm);
-//            Intent intent = new Intent(CourseDetailsActivity.this, TermActivity.class);
-//            startActivity(intent);
-//        }
-//
-//    }
+        if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() ||
+                spinnerValue.isEmpty() || instructor.trim().isEmpty() || email.trim().isEmpty() ||
+                phone.trim().isEmpty()) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("All fields must be completed!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+
+        } else {
+//            List<Course> allCourses = repository.getAllCourses();
+//            cid = allCourses.get(allCourses.size() - 1).getCourseId();
+
+            updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, termId, termTitle, termStart, termEnd);
+            repository.update(updateCourse);
+
+            Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
+            intent.putExtra("termId", tempTermId);
+            intent.putExtra("termTitle", tempTermTitle);
+            intent.putExtra("termStartDate", tempTermStart);
+            intent.putExtra("termEndDate", tempTermEnd);
+            startActivity(intent);
+        }
+
+    }
 
     public void AddAssessment(View view) {
         Intent intent = new Intent(CourseDetailsActivity.this, CourseAddActivity.class);
-        intent.putExtra("termId", tempId);
-        intent.putExtra("title", tempTitle);
-        intent.putExtra("startDate", tempStart);
-        intent.putExtra("endDate", tempEnd);
+        intent.putExtra("courseId", tempCourseId);
+        intent.putExtra("termId", tempTermId);
+        intent.putExtra("courseTitle", tempCourseTitle);
+        intent.putExtra("courseStartDate", tempCourseStart);
+        intent.putExtra("courseEndDate", tempCourseEnd);
+        intent.putExtra("courseStatus", tempSpinner);
+        intent.putExtra("courseNotes", tempNotes);
+        intent.putExtra("instructorName", tempInstructorName);
+        intent.putExtra("instructorEmail", tempInstructorEmail);
+        intent.putExtra("instructorPhone", tempInstructorPhone);
         startActivity(intent);
     }
 
 
+    public void DeleteCourse(View view) {
+        repository.delete(selectedCourse);
+        Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
+        intent.putExtra("termId", tempTermId);
+        intent.putExtra("termTitle", tempTermTitle);
+        intent.putExtra("termStartDate", tempTermStart);
+        intent.putExtra("termEndDate", tempTermEnd);
+        startActivity(intent);
+    }
 }
 

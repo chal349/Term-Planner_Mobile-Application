@@ -67,11 +67,11 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         repository = new Repository(getApplication());
         termId = getIntent().getIntExtra("termId", -1);
         tempId = termId;
-        termTitle = getIntent().getStringExtra("title");
+        termTitle = getIntent().getStringExtra("termTitle");
         tempTitle = termTitle;
-        termStart = getIntent().getStringExtra("startDate");
+        termStart = getIntent().getStringExtra("termStartDate");
         tempStart = termStart;
-        termEnd = getIntent().getStringExtra("endDate");
+        termEnd = getIntent().getStringExtra("termEndDate");
         tempEnd = termEnd;
 
         courseName = findViewById(R.id.courseName);
@@ -195,15 +195,15 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
 
         } else {
 
-            newCourse = new Course(courseId, name, start, end, status, statusSelected, instructor, phone, email, noteContent, tempId);
+            newCourse = new Course(courseId, name, start, end, status, statusSelected, instructor, phone, email, noteContent, tempId, tempTitle, tempStart, tempEnd );
 
             repository.insert(newCourse);
 
             Intent intent = new Intent(CourseAddActivity.this, TermDetailsActivity.class);
             intent.putExtra("termId", tempId);
-            intent.putExtra("title", tempTitle);
-            intent.putExtra("startDate", tempStart);
-            intent.putExtra("endDate", tempEnd);
+            intent.putExtra("termTitle", tempTitle);
+            intent.putExtra("termStartDate", tempStart);
+            intent.putExtra("termEndDate", tempEnd);
             startActivity(intent);
 
         }

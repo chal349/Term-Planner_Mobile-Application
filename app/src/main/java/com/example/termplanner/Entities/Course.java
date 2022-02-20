@@ -9,88 +9,86 @@ public class Course {
     @PrimaryKey(autoGenerate = true)
     private int courseId;
 
-    private String title;
-    private String startDate;
-    private String endDate;
-    private String status;
-    private int statusSelection;
+    private String courseTitle;
+    private String courseStartDate;
+    private String courseEndDate;
+    private String courseStatus;
+    private int courseStatusSelection;
     private String instructorName;
     private String instructorPhone;
     private String instructorEmail;
     private String noteContent;
     private int termId;
+    private String termTitle;
+    private String termStartDate;
+    private String termEndDate;
 
+    public Course(int courseId, String courseTitle, String courseStartDate, String courseEndDate, String courseStatus,
+                  int courseStatusSelection, String instructorName, String instructorPhone, String instructorEmail,
+                  String noteContent, int termId, String termTitle, String termStartDate, String termEndDate) {
 
-
-    public Course(int courseId, String title, String startDate, String endDate, String status, int statusSelection,  String instructorName, String instructorPhone, String instructorEmail, String noteContent, int termId) {
         this.courseId = courseId;
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.statusSelection = statusSelection;
+        this.courseTitle = courseTitle;
+        this.courseStartDate = courseStartDate;
+        this.courseEndDate = courseEndDate;
+        this.courseStatus = courseStatus;
+        this.courseStatusSelection = courseStatusSelection;
         this.instructorName = instructorName;
         this.instructorPhone = instructorPhone;
         this.instructorEmail = instructorEmail;
         this.noteContent = noteContent;
         this.termId = termId;
-    }
-
-
-    public int getTermId() {
-        return termId;
-    }
-
-    public void setTermId(int termId) {
-        this.termId = termId;
+        this.termTitle = termTitle;
+        this.termStartDate = termStartDate;
+        this.termEndDate = termEndDate;
     }
 
     public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int id) {
-        this.courseId = id;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCourseTitle() {
+        return courseTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getCourseStartDate() {
+        return courseStartDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setCourseStartDate(String courseStartDate) {
+        this.courseStartDate = courseStartDate;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public String getCourseEndDate() {
+        return courseEndDate;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setCourseEndDate(String courseEndDate) {
+        this.courseEndDate = courseEndDate;
     }
 
-    public String getStatus() {
-        return status;
+    public String getCourseStatus() {
+        return courseStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCourseStatus(String courseStatus) {
+        this.courseStatus = courseStatus;
     }
 
-    public int getStatusSelection() {
-        return statusSelection;
+    public int getCourseStatusSelection() {
+        return courseStatusSelection;
     }
 
-    public void setStatusSelection(int statusSelection) {
-        this.statusSelection = statusSelection;
+    public void setCourseStatusSelection(int courseStatusSelection) {
+        this.courseStatusSelection = courseStatusSelection;
     }
 
     public String getInstructorName() {
@@ -124,4 +122,38 @@ public class Course {
     public void setNoteContent(String noteContent) {
         this.noteContent = noteContent;
     }
+
+    public int getTermId() {
+        return termId;
+    }
+
+    public void setTermId(int termId) {
+        this.termId = termId;
+    }
+
+    public String getTermTitle() {
+        return termTitle;
+    }
+
+    public void setTermTitle(String termTitle) {
+        this.termTitle = termTitle;
+    }
+
+    public String getTermStartDate() {
+        return termStartDate;
+    }
+
+    public void setTermStartDate(String termStartDate) {
+        this.termStartDate = termStartDate;
+    }
+
+    public String getTermEndDate() {
+        return termEndDate;
+    }
+
+    public void setTermEndDate(String termEndDate) {
+        this.termEndDate = termEndDate;
+    }
 }
+
+

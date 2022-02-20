@@ -60,21 +60,23 @@ public class TermDetailsActivity extends AppCompatActivity{
         // GET INTENTS FROM PREVIOUS SCREEN
         int termID = getIntent().getIntExtra("termId", -1);
         tempId = termID;
-        String termTitle = getIntent().getStringExtra("title");
+        String termTitle = getIntent().getStringExtra("termTitle");
         tempTitle = termTitle;
-        String termStartDate = getIntent().getStringExtra("startDate");
+        String termStartDate = getIntent().getStringExtra("termStartDate");
         tempStart = termStartDate;
-        String termEndDate = getIntent().getStringExtra("endDate");
+        String termEndDate = getIntent().getStringExtra("termEndDate");
         tempEnd = termEndDate;
 
-  //      if (termID != -1) {
-            termName.setText(termTitle);
-            startDate.setText(termStartDate);
-            endDate.setText(termEndDate);
-    //    }
+        if (termID != -1) {
+            termName.setText(tempTitle);
+            startDate.setText(tempStart);
+            endDate.setText(tempEnd);
+        }
 
-        repository = new Repository(getApplication());
+       // repository = new Repository(getApplication());
         List<Course> coursesInTerm = new ArrayList<>();
+
+
 
         RecyclerView recyclerView = findViewById(R.id.term_with_courses_recycler);
 
@@ -175,12 +177,13 @@ public class TermDetailsActivity extends AppCompatActivity{
             alertDialog.show();
 
         } else {
-            List<Term> allTerms = repository.getAllTerms();
-            id = allTerms.get(allTerms.size() - 1).getTermId();
+//            List<Term> allTerms = repository.getAllTerms();
+//            id = allTerms.get(allTerms.size() - 1).getTermId();
 
-            updateTerm = new Term(id, name, start, end);
+            updateTerm = new Term(tempId, name, start, end);
             repository.update(updateTerm);
             Intent intent = new Intent(TermDetailsActivity.this, TermActivity.class);
+
             startActivity(intent);
         }
 
@@ -189,9 +192,9 @@ public class TermDetailsActivity extends AppCompatActivity{
     public void AddCourse(View view) {
         Intent intent = new Intent(TermDetailsActivity.this, CourseAddActivity.class);
         intent.putExtra("termId", tempId);
-        intent.putExtra("title", tempTitle);
-        intent.putExtra("startDate", tempStart);
-        intent.putExtra("endDate", tempEnd);
+        intent.putExtra("termTitle", tempTitle);
+        intent.putExtra("termStartDate", tempStart);
+        intent.putExtra("termEndDate", tempEnd);
         startActivity(intent);
     }
 

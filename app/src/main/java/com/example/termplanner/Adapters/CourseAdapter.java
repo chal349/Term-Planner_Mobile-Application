@@ -43,15 +43,20 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                     int position = getAdapterPosition();
                     final Course current = courseList.get(position);
                     Intent intent = new Intent(context, CourseDetailsActivity.class);
-                    intent.putExtra("title", current.getTitle());
-                    intent.putExtra("startDate", current.getStartDate());
-                    intent.putExtra("endDate", current.getEndDate());
-                    intent.putExtra("status", current.getStatus());
-                    intent.putExtra("courseStatusSelection", current.getStatusSelection());
-                    intent.putExtra("notes", current.getNoteContent());
+                    intent.putExtra("courseTitle", current.getCourseTitle());
+                    intent.putExtra("courseStartDate", current.getCourseStartDate());
+                    intent.putExtra("courseEndDate", current.getCourseEndDate());
+                    intent.putExtra("courseStatus", current.getCourseStatus());
+                    intent.putExtra("courseStatusSelection", current.getCourseStatusSelection());
+                    intent.putExtra("courseNotes", current.getNoteContent());
                     intent.putExtra("instructorName", current.getInstructorName());
                     intent.putExtra("instructorEmail", current.getInstructorEmail());
                     intent.putExtra("instructorPhone", current.getInstructorPhone());
+                    intent.putExtra("termId", current.getTermId());
+                    intent.putExtra("termTitle", current.getTermTitle());
+                    intent.putExtra("termStartDate", current.getTermStartDate());
+                    intent.putExtra("termEndDate", current.getTermEndDate());
+                    intent.putExtra("courseId", current.getCourseId());
                     intent.putExtra("position", position);
                     context.startActivity(intent);
                 }
@@ -79,8 +84,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     public void onBindViewHolder(@NonNull CourseAdapter.ViewHolder holder, int position) {
         if(courseList != null){
             final Course current = courseList.get(position);
-            holder.title.setText(current.getTitle());
-            holder.date.setText(current.getStartDate() + " - " + current.getEndDate());
+            holder.title.setText(current.getCourseTitle());
+            holder.date.setText(current.getCourseStartDate() + " - " + current.getCourseEndDate());
         }
         else{
             holder.title.setText("No product name");
