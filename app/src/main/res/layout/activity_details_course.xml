@@ -262,7 +262,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:clipToPadding="false"
-            tools:listitem="@layout/list_course" />
+            tools:listitem="@layout/list_assessment" />
     </LinearLayout>
 
     <LinearLayout

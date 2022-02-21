@@ -57,7 +57,7 @@ public class TermDetailsActivity extends AppCompatActivity{
         startDate = findViewById(R.id.termDetailsStartDate);
         endDate = findViewById(R.id.termdDetailsEndDate);
 
-        // GET INTENTS FROM PREVIOUS SCREEN
+        // GET INTENTS
         int termID = getIntent().getIntExtra("termId", -1);
         tempId = termID;
         String termTitle = getIntent().getStringExtra("termTitle");
@@ -73,11 +73,7 @@ public class TermDetailsActivity extends AppCompatActivity{
             endDate.setText(tempEnd);
         }
 
-       // repository = new Repository(getApplication());
         List<Course> coursesInTerm = new ArrayList<>();
-
-
-
         RecyclerView recyclerView = findViewById(R.id.term_with_courses_recycler);
 
         final CourseAdapter courseAdapter = new CourseAdapter(this);

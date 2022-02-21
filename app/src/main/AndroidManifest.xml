@@ -22,6 +22,10 @@
             android:exported="false"
             android:parentActivityName=".UI.MainMenuActivity" />
         <activity
+            android:name=".UI.AssessmentAddDetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.CourseDetailsActivity" />
+        <activity
             android:name=".UI.CourseActivity"
             android:exported="false"
             android:parentActivityName=".UI.MainMenuActivity" />

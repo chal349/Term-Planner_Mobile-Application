@@ -11,31 +11,44 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.termplanner.Entities.Course;
+import com.example.termplanner.Entities.Assessment;
 import com.example.termplanner.R;
-import com.example.termplanner.UI.CourseDetailsActivity;
-import com.example.termplanner.UI.TermDetailsActivity;
+import com.example.termplanner.UI.AssessmentAddDetailsActivity;
 
 import java.util.List;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
+public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView title;
         private final TextView date;
+        private final TextView type;
+
+        //   private final status;
+        //   private String instructorName;
+        //   private String instructorPhone;
+        //  private String instructorEmail;
+        //   private String noteTitle;
+        //  private String noteContent;
 
         private ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.course_list_title);
-            date = itemView.findViewById(R.id.course_list_date);
+            title = itemView.findViewById(R.id.assessment_list_title);
+            date = itemView.findViewById(R.id.assessment_list_date);
+            type = itemView.findViewById(R.id.assessment_type);
 
-            CardView courseListView = itemView.findViewById(R.id.course_list_view);
-            courseListView.setOnClickListener(new View.OnClickListener() {
+            CardView assessmentListView = itemView.findViewById(R.id.assessment_list_view);
+            assessmentListView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    final Course current = courseList.get(position);
-                    Intent intent = new Intent(context, CourseDetailsActivity.class);
+                    final Assessment current = assessmentList.get(position);
+                    Intent intent = new Intent(context, AssessmentAddDetailsActivity.class);
+                    intent.putExtra("assessmentId", current.getAssessmentId());
+                    intent.putExtra("assessmentTitle", current.getAssessmentTitle());
+                    intent.putExtra("assessmentType", current.getAssessmentType());
+                    intent.putExtra("assessmentStartDate", current.getAssessmentStartDate());
+                    intent.putExtra("assessmentEndDate", current.getAssessmentEndDate());
                     intent.putExtra("courseId", current.getCourseId());
                     intent.putExtra("courseTitle", current.getCourseTitle());
                     intent.putExtra("courseStartDate", current.getCourseStartDate());
@@ -59,40 +72,42 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
     private final LayoutInflater inflater;
     private final Context context;
-    private List<Course> courseList;
+    private List<Assessment> assessmentList;
 
-    public CourseAdapter(Context context) {
+    public AssessmentAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         this.context = context;
     }
 
     @NonNull
     @Override
-    public CourseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.list_course, parent, false);
-        return new CourseAdapter.ViewHolder(itemView);
+    public AssessmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = inflater.inflate(R.layout.list_assessment, parent, false);
+        return new AssessmentAdapter.ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseAdapter.ViewHolder holder, int position) {
-        if(courseList != null){
-            final Course current = courseList.get(position);
-            holder.title.setText(current.getCourseTitle());
-            holder.date.setText(current.getCourseStartDate() + " - " + current.getCourseEndDate());
+    public void onBindViewHolder(@NonNull AssessmentAdapter.ViewHolder holder, int position) {
+        if(assessmentList != null){
+            final Assessment current = assessmentList.get(position);
+            holder.title.setText(current.getAssessmentTitle());
+            holder.type.setText(current.getAssessmentType());
+            holder.date.setText(current.getAssessmentStartDate() + " - " + current.getAssessmentEndDate());
         }
         else{
             holder.title.setText(" ");
+            holder.type.setText(" ");
             holder.date.setText(" ");
         }
     }
 
-    public void setCourses(List<Course> courses) {
-        courseList = courses;
+    public void setAssessments(List<Assessment> courses) {
+        assessmentList = courses;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return courseList.size();
+        return assessmentList.size();
     }
 }

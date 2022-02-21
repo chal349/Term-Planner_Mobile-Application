@@ -71,8 +71,8 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
         holder.date.setText(current.getStartDate() + " - " + current.getEndDate());
     }
     else{
-        holder.title.setText("No product name");
-        holder.date.setText("no date");
+        holder.title.setText(" ");
+        holder.date.setText(" ");
     }
 }
 

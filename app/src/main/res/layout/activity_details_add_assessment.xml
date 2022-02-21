@@ -5,13 +5,13 @@
     android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.TermAddActivity"
+    tools:context=".UI.AssessmentAddDetailsActivity"
     >
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/cardView9"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="24dp"
@@ -26,26 +26,27 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/termTitle"
+                android:id="@+id/assessmentTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="100dp"
-                android:layout_marginBottom="8dp"
+
                 android:ellipsize="start"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="TERM NAME"
-                android:inputType="textPersonName"
+                android:hint="Assessment Title"
+                android:inputType="text"
                 android:minHeight="48dp"
                 android:text=""
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/startDate"
+                android:id="@+id/assessmentStartDate"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_centerInParent="true"
@@ -62,7 +63,7 @@
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/endDate"
+                android:id="@+id/assessmentEndDate"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_centerInParent="true"
@@ -78,6 +79,32 @@
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF" />
 
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp">
+
+                <RadioButton
+                    android:id="@+id/performance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/teal_700"
+                    android:text="Performance Assessment"
+                    android:textColor="@color/white"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/objective"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/teal_700"
+                    android:text="Objective Assessment"
+                    android:textColor="@color/white" />
+            </RadioGroup>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -90,23 +117,23 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toBottomOf="@+id/cardView9">
 
         <Button
-            android:id="@+id/cancel_term_button"
+            android:id="@+id/delete_assessment_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/teal_700"
             android:layout_marginRight="4dp"
-            android:text="CANCEL" />
+            android:text="DELETE" />
 
         <Button
-            android:id="@+id/save_term_button"
+            android:id="@+id/save_assessment_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="saveTerm"
+            android:onClick="saveAssessment"
             android:backgroundTint="@color/teal_700"
             android:layout_marginLeft="4dp"
             android:text="SAVE" />

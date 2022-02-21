@@ -26,6 +26,7 @@ import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.termplanner.Adapters.AssessmentAdapter;
 import com.example.termplanner.Adapters.CourseAdapter;
 import com.example.termplanner.Entities.Assessment;
 import com.example.termplanner.Entities.Course;
@@ -52,6 +53,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
     static String tempCourseStart;
     static String tempCourseEnd;
     static String tempSpinner;
+    static int tempSpinnerSelection;
     static String tempNotes;
     static String tempInstructorName;
     static String tempInstructorEmail;
@@ -131,7 +133,6 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         termEnd = getIntent().getStringExtra("termEndDate");
         tempTermEnd = termEnd;
 
-
         String courseTitle = getIntent().getStringExtra("courseTitle");
         tempCourseTitle = courseTitle;
         String courseStartDate = getIntent().getStringExtra("courseStartDate");
@@ -139,8 +140,10 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         String courseEndDate = getIntent().getStringExtra("courseEndDate");
         tempCourseEnd = courseEndDate;
         spinnerValue = getIntent().getStringExtra("courseStatus");
-        spinnerSelectionPosition = getIntent().getIntExtra("courseStatusSelection", -1);
         tempSpinner = spinnerValue;
+        spinnerSelectionPosition = getIntent().getIntExtra("courseStatusSelection", -1);
+        tempSpinnerSelection = spinnerSelectionPosition;
+
 
         //Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.status, android.R.layout.simple_spinner_item);
@@ -195,6 +198,21 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 //        *****LinearLayoutManager horizontalLayoutManager
 //                = new LinearLayoutManager(TermDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false);
 //        recyclerView.setLayoutManager(horizontalLayoutManager);
+        List<Assessment> assessmentsInCourse = new ArrayList<>();
+        RecyclerView recyclerView = findViewById(R.id.course_with_assessments_recycler);
+
+        final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
+        recyclerView.setAdapter(assessmentAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        for(Assessment assessment : repository.getAllAssessments()){
+            if(assessment.getCourseId() == tempCourseId){
+                assessmentsInCourse.add(assessment);
+            }
+        }
+        assessmentAdapter.setAssessments(assessmentsInCourse);
+        assessmentsInCourseCount = assessmentsInCourse.size();
+
+
 
 
         //START DATE PICKER
@@ -307,13 +325,17 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
     }
 
     public void AddAssessment(View view) {
-        Intent intent = new Intent(CourseDetailsActivity.this, CourseAddActivity.class);
+        Intent intent = new Intent(CourseDetailsActivity.this, AssessmentAddDetailsActivity.class);
         intent.putExtra("courseId", tempCourseId);
         intent.putExtra("termId", tempTermId);
+        intent.putExtra("termTitle", tempTermTitle);
+        intent.putExtra("termStartDate", tempTermStart);
+        intent.putExtra("termEndDate", tempTermEnd);
         intent.putExtra("courseTitle", tempCourseTitle);
         intent.putExtra("courseStartDate", tempCourseStart);
         intent.putExtra("courseEndDate", tempCourseEnd);
         intent.putExtra("courseStatus", tempSpinner);
+        intent.putExtra("courseStatusSelection", tempSpinnerSelection);
         intent.putExtra("courseNotes", tempNotes);
         intent.putExtra("instructorName", tempInstructorName);
         intent.putExtra("instructorEmail", tempInstructorEmail);
