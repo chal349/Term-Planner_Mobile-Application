@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_marginBottom="16dp">
+    android:layout_height="72dp"
+    android:layout_marginBottom="12dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/term_list_view"
@@ -27,8 +27,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="9dp"
                 android:text="Term Name"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"
@@ -41,11 +39,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="00/00/0000 - 00/00/0000"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/term_list_title" />
 
             <ImageView
                 android:layout_width="60dp"

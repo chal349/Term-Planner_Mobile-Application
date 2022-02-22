@@ -52,6 +52,7 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
     static String tempInstructorEmail;
     static String tempInstructorPhone;
     static int tempAssessmentId;
+    static String tempAssessmentTitle;
     static String tempAssessmentStartDate;
     static String tempAssessmentEndDate;
     static String tempRadioSelection;
@@ -79,25 +80,20 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
         performance = findViewById(R.id.performance);
         objective = findViewById(R.id.objective);
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
-                if (performance.isChecked()) {
-                    radioSelection.equals("PA");
-                } else {
-                    radioSelection.equals("OA");
-                }
-            }
-        });
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
+//                if (performance.isChecked()) {
+//                    radioSelection = performance.toString();
+//                }
+//                if (objective.isChecked()){
+//                    radioSelection = objective.toString();
+//                }
+//            }
+//        });
+//
 
-        assessmentId = getIntent().getIntExtra("assessmentId", -1);
-        tempAssessmentId = assessmentId;
-        List<Assessment> allAssessments = repository.getAllAssessments();
-        for (Assessment assessment : allAssessments) {
-            if (assessment.getAssessmentId() == assessmentId) {
-                selectedAssessment = assessment;
-            }
-        }
+
 
         tempTermId = getIntent().getIntExtra("termId", -1);
         tempTermTitle = getIntent().getStringExtra("termTitle");
@@ -113,6 +109,32 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
         tempInstructorName = getIntent().getStringExtra("instructorName");
         tempInstructorEmail = getIntent().getStringExtra("instructorEmail");
         tempInstructorPhone = getIntent().getStringExtra("instructorPhone");
+        tempAssessmentId = getIntent().getIntExtra("assessmentId", -1);
+        List<Assessment> allAssessments = repository.getAllAssessments();
+        for (Assessment assessment : allAssessments) {
+            if (assessment.getAssessmentId() == tempAssessmentId) {
+                selectedAssessment = assessment;
+            }
+        }
+
+
+        tempAssessmentTitle = getIntent().getStringExtra("assessmentTitle");
+        tempAssessmentStartDate = getIntent().getStringExtra("assessmentStartDate");
+        tempAssessmentEndDate = getIntent().getStringExtra("assessmentEndDate");
+        tempRadioSelection = getIntent().getStringExtra("assessmentType");
+
+        assessmentTitle.setText(tempAssessmentTitle);
+        assessmentStartDate.setText(tempAssessmentStartDate);
+        assessmentEndDate.setText(tempAssessmentEndDate);
+        if(selectedAssessment == null){
+            performance.setChecked(true);
+        }
+            else if(selectedAssessment.getAssessmentType() == "Performance Assessment"){
+                 performance.setChecked(true);
+        }
+            else if(selectedAssessment.getAssessmentType().equals("Objective Assessment") ){
+                objective.setChecked(true);
+        }
 
 
         //START DATE PICKER
@@ -170,11 +192,12 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
 
         Assessment assessment;
         String name = assessmentTitle.getText().toString();
-        String selection = radioSelection;
         String start = assessmentStartDate.getText().toString();
         String end = assessmentEndDate.getText().toString();
-
-
+        String selection = "Objective Assessment";
+        if(performance.isChecked()){
+            selection = "Performance Assessment";
+        }
 
         if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty()) {
 
@@ -189,17 +212,12 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
                         }
                     });
             alertDialog.show();
-
         } else {
-
-
-
             assessment = new Assessment(assessmentId, name, selection, start, end, tempCourseId, tempCourseTitle,
                     tempCourseStart, tempCourseEnd, tempSpinner, tempSpinnerSelection, tempInstructorName, tempInstructorEmail,
                     tempInstructorPhone, tempNotes, tempTermId, tempTermTitle, tempTermStart, tempTermEnd);
 
-            repository.insert(assessment);
-
+            repository.update(assessment);
             Intent intent = new Intent(AssessmentAddDetailsActivity.this, CourseDetailsActivity.class);
             intent.putExtra("courseId", tempCourseId);
             intent.putExtra("termId", tempTermId);
@@ -216,6 +234,28 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
             intent.putExtra("instructorEmail", tempInstructorEmail);
             intent.putExtra("instructorPhone", tempInstructorPhone);
             startActivity(intent);
+
         }
     }
+
+    public void DeleteAssessment(View view) {
+        repository.delete(selectedAssessment);
+        Intent intent = new Intent(AssessmentAddDetailsActivity.this, CourseDetailsActivity.class);
+        intent.putExtra("courseId", tempCourseId);
+        intent.putExtra("termId", tempTermId);
+        intent.putExtra("termTitle", tempTermTitle);
+        intent.putExtra("termStartDate", tempTermStart);
+        intent.putExtra("termEndDate", tempTermEnd);
+        intent.putExtra("courseTitle", tempCourseTitle);
+        intent.putExtra("courseStartDate", tempCourseStart);
+        intent.putExtra("courseEndDate", tempCourseEnd);
+        intent.putExtra("courseStatus", tempSpinner);
+        intent.putExtra("courseStatusSelection", tempSpinnerSelection);
+        intent.putExtra("courseNotes", tempNotes);
+        intent.putExtra("instructorName", tempInstructorName);
+        intent.putExtra("instructorEmail", tempInstructorEmail);
+        intent.putExtra("instructorPhone", tempInstructorPhone);
+        startActivity(intent);
+    }
+
 }

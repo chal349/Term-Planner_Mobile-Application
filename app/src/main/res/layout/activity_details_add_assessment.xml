@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,14 +27,13 @@
 
             <EditText
                 android:id="@+id/assessmentTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginBottom="8dp"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="96dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginRight="100dp"
-
+                android:layout_marginRight="96dp"
                 android:ellipsize="start"
                 android:ems="10"
                 android:gravity="center"
@@ -124,6 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="DeleteAssessment"
             android:backgroundTint="@color/teal_700"
             android:layout_marginRight="4dp"
             android:text="DELETE" />

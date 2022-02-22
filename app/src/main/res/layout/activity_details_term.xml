@@ -10,9 +10,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/termDetailsCardView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,8 @@
                 android:ellipsize="start"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="Term Name"
+                android:hint="TERM NAME"
+                android:textStyle="italic"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 android:text=""
@@ -87,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,16 +116,40 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/courses_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_save_group"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout4">
+
+        <TextView
+            android:id="@+id/courses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:textColor="@color/white"
+            android:text="COURSES" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="340dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/delete_save_group">
+        app:layout_constraintTop_toBottomOf="@id/courses_text">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/term_with_courses_recycler"
@@ -139,7 +164,7 @@
         android:layout_width="409dp"
         android:layout_height="81dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal"

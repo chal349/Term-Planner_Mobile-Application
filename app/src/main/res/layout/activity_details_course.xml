@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="336dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/cardview_dark_background"
-            android:padding="8dp">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,6 +38,7 @@
                     android:ems="10"
                     android:layout_weight="1"
                     android:hint="COURSE TITLE"
+                    android:textStyle="italic"
                     android:inputType="text"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
@@ -142,6 +143,8 @@
                     android:layout_height="48dp"
                     android:layout_weight="1.5"
                     android:layout_marginLeft="4dp"
+                    android:textStyle="italic"
+                    android:hint="Enter Notes..."
                     android:background="@color/cardview_light_background"
                     android:ems="10"
                     android:gravity="center"
@@ -154,13 +157,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight="4"
+                    android:text="INSTRUCTOR:"
+                    android:textStyle="italic"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:ellipsize="start"/>
+
                 <EditText
                     android:id="@+id/instructorNameCourseDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:ems="10"
                     android:layout_weight="1"
-                    android:hint="INSTRUCTOR NAME"
+                    android:hint="Enter Name"
+                    android:textStyle="italic"
                     android:inputType="textPersonName"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
@@ -174,13 +190,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight="2"
+                    android:text="Email:"
+                    android:textStyle="italic"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:ellipsize="start"/>
+
                 <EditText
                     android:id="@+id/instructorEmailCourseDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:ems="10"
                     android:layout_weight="1"
-                    android:hint="INSTRUCTOR EMAIL"
+                    android:hint="Email Address"
+                    android:textStyle="italic"
                     android:inputType="textEmailAddress"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
@@ -194,13 +223,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight="2"
+                    android:text="Phone #:"
+                    android:textStyle="italic"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:ellipsize="start"/>
+
+
                 <EditText
                     android:id="@+id/instructorPhoneCourseDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:ems="10"
                     android:layout_weight="1"
-                    android:hint="INSTRUCTOR PHONE NUMBER"
+                    android:hint="Phone Number"
+                    android:textStyle="italic"
                     android:inputType="phone"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
@@ -216,7 +259,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -228,10 +271,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
-            android:onClick="DeleteCourse"
             android:layout_weight="1"
             android:backgroundTint="@color/teal_700"
-            android:text="DELETE COURSE" />
+            android:onClick="DeleteCourse"
+            android:text="DELETE" />
 
         <Button
             android:id="@+id/save_course_details_button"
@@ -239,8 +282,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_weight="1"
-            android:onClick="saveCourseDetails"
             android:backgroundTint="@color/teal_700"
+            android:onClick="saveCourseDetails"
             android:text="SAVE" />
     </LinearLayout>
 
@@ -270,7 +313,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal"

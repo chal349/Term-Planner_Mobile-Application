@@ -24,7 +24,7 @@
         <activity
             android:name=".UI.AssessmentAddDetailsActivity"
             android:exported="false"
-            android:parentActivityName=".UI.CourseDetailsActivity" />
+            android:parentActivityName=".UI.AssessmentActivity" />
         <activity
             android:name=".UI.CourseActivity"
             android:exported="false"
