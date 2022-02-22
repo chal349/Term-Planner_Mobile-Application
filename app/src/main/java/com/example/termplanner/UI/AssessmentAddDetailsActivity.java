@@ -190,7 +190,8 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
 
     public void saveAssessment(View view) {
 
-        Assessment assessment;
+        Assessment updateAssessment;
+        Assessment newAssessment;
         String name = assessmentTitle.getText().toString();
         String start = assessmentStartDate.getText().toString();
         String end = assessmentEndDate.getText().toString();
@@ -212,12 +213,21 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
                         }
                     });
             alertDialog.show();
-        } else {
-            assessment = new Assessment(assessmentId, name, selection, start, end, tempCourseId, tempCourseTitle,
+        }
+
+        if(tempAssessmentId != -1){
+            updateAssessment = new Assessment(tempAssessmentId, name, selection, start, end, tempCourseId, tempCourseTitle,
                     tempCourseStart, tempCourseEnd, tempSpinner, tempSpinnerSelection, tempInstructorName, tempInstructorEmail,
                     tempInstructorPhone, tempNotes, tempTermId, tempTermTitle, tempTermStart, tempTermEnd);
+            repository.update(updateAssessment);
+        }
+            else{
+            newAssessment = new Assessment(assessmentId, name, selection, start, end, tempCourseId, tempCourseTitle,
+                    tempCourseStart, tempCourseEnd, tempSpinner, tempSpinnerSelection, tempInstructorName, tempInstructorEmail,
+                    tempInstructorPhone, tempNotes, tempTermId, tempTermTitle, tempTermStart, tempTermEnd);
+            repository.insert(newAssessment);
+        }
 
-            repository.update(assessment);
             Intent intent = new Intent(AssessmentAddDetailsActivity.this, CourseDetailsActivity.class);
             intent.putExtra("courseId", tempCourseId);
             intent.putExtra("termId", tempTermId);
@@ -235,7 +245,6 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
             intent.putExtra("instructorPhone", tempInstructorPhone);
             startActivity(intent);
 
-        }
     }
 
     public void DeleteAssessment(View view) {
