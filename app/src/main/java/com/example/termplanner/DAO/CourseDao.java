@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.termplanner.Entities.Course;
+import com.example.termplanner.Entities.Term;
 
 import java.util.List;
 

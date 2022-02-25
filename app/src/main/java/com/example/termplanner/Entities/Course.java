@@ -8,7 +8,6 @@ public class Course {
 
     @PrimaryKey(autoGenerate = true)
     private int courseId;
-
     private String courseTitle;
     private String courseStartDate;
     private String courseEndDate;

@@ -1,14 +1,19 @@
 package com.example.termplanner.UI;
 
+import static com.example.termplanner.UI.TermDetailsActivity.tempEnd;
 import static com.example.termplanner.UI.TermDetailsActivity.tempId;
 import static com.example.termplanner.UI.TermDetailsActivity.tempStart;
+import static com.example.termplanner.UI.TermDetailsActivity.tempTitle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,9 +53,9 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
     Course selectedCourse;
     static int tempCourseId;
     static int tempTermId;
-    public static String tempTermTitle;
-    public static String tempTermStart;
-    public static String tempTermEnd;
+    String tempTermTitle;
+    String tempTermStart;
+    String tempTermEnd;
     static String tempCourseTitle;
     static String tempCourseStart;
     static String tempCourseEnd;
@@ -262,6 +267,46 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.course_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.shareNote:
+                Intent notesIntent = new Intent();
+                notesIntent.setAction(Intent.ACTION_SEND);
+                notesIntent.putExtra(Intent.EXTRA_TEXT, courseNotes.getText().toString());
+                notesIntent.putExtra(Intent.EXTRA_TITLE, "Notes from - " + courseName.getText().toString());
+                notesIntent.setType("text/plain");
+                Intent noteIntentChooser = Intent.createChooser(notesIntent, null);
+                startActivity(noteIntentChooser);
+                return true;
+            case R.id.notifyAlert:
+                String dateFromScreen = startDate.getText().toString();
+                Date myDate = null;
+                try {
+                    myDate = sdf.parse(dateFromScreen);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Long trigger = myDate.getTime();
+                Intent intent = new Intent(CourseDetailsActivity.this, Receiver.class);
+                intent.putExtra("key", courseName.getText().toString() + " starts today!");
+                PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsActivity.this, MainMenuActivity.numAlert++, intent, PendingIntent.FLAG_MUTABLE);
+                AlarmManager alarmManager = (AlarmManager)  getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
         spinnerValue = parent.getItemAtPosition(position).toString();
         spinnerSelectionPosition = parent.getSelectedItemPosition();
@@ -302,29 +347,35 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
             alertDialog.show();
 
         } else {
-//            List<Course> allCourses = repository.getAllCourses();
-//            cid = allCourses.get(allCourses.size() - 1).getCourseId();
 
-            updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, termId, termTitle, termStart, termEnd);
-            repository.update(updateCourse);
+            if (termId != -1) {
+                updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, tempId, tempTitle, tempStart, tempEnd);
+                repository.update(updateCourse);
 
-            Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
-            intent.putExtra("termId", tempTermId);
-            intent.putExtra("termTitle", tempTermTitle);
-            intent.putExtra("termStartDate", tempTermStart);
-            intent.putExtra("termEndDate", tempTermEnd);
-            startActivity(intent);
+                Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
+                intent.putExtra("termId", tempId);
+                intent.putExtra("termTitle", tempTitle);
+                intent.putExtra("termStartDate", tempStart);
+                intent.putExtra("termEndDate", tempEnd);
+                startActivity(intent);
+            }
         }
+          if(termId == 0){
+                 updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, tempTermId, tempTermTitle, tempTermStart, tempTermEnd);
+                 repository.update(updateCourse);
 
+                Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
+                startActivity(intent);
+        }
     }
 
     public void AddAssessment(View view) {
         Intent intent = new Intent(CourseDetailsActivity.this, AssessmentAddDetailsActivity.class);
         intent.putExtra("courseId", tempCourseId);
-        intent.putExtra("termId", tempTermId);
-        intent.putExtra("termTitle", tempTermTitle);
-        intent.putExtra("termStartDate", tempTermStart);
-        intent.putExtra("termEndDate", tempTermEnd);
+        intent.putExtra("termId", tempId);
+        intent.putExtra("termTitle", tempTitle);
+        intent.putExtra("termStartDate", tempStart);
+        intent.putExtra("termEndDate", tempEnd);
         intent.putExtra("courseTitle", tempCourseTitle);
         intent.putExtra("courseStartDate", tempCourseStart);
         intent.putExtra("courseEndDate", tempCourseEnd);
@@ -341,35 +392,11 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
     public void DeleteCourse(View view) {
         repository.delete(selectedCourse);
         Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
-        intent.putExtra("termId", tempTermId);
-        intent.putExtra("termTitle", tempTermTitle);
-        intent.putExtra("termStartDate", tempTermStart);
-        intent.putExtra("termEndDate", tempTermEnd);
+        intent.putExtra("termId", tempId);
+        intent.putExtra("termTitle", tempTitle);
+        intent.putExtra("termStartDate", tempStart);
+        intent.putExtra("termEndDate", tempEnd);
         startActivity(intent);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.course_menu, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            case R.id.shareNote:
-                Intent notesIntent = new Intent();
-                notesIntent.setAction(Intent.ACTION_SEND);
-                notesIntent.putExtra(Intent.EXTRA_TEXT, courseNotes.getText().toString());
-                notesIntent.putExtra(Intent.EXTRA_TITLE, "Notes from - " + courseName.getText().toString());
-                notesIntent.setType("text/plain");
-                Intent noteIntentChooser = Intent.createChooser(notesIntent, null);
-                startActivity(noteIntentChooser);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 }

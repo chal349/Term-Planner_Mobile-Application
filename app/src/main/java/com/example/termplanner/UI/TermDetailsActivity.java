@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.termplanner.Adapters.CourseAdapter;
 import com.example.termplanner.Adapters.TermAdapter;
+import com.example.termplanner.DAO.CourseDao;
 import com.example.termplanner.Entities.Course;
 import com.example.termplanner.Entities.Term;
 import com.example.termplanner.R;
@@ -178,8 +179,12 @@ public class TermDetailsActivity extends AppCompatActivity{
 
             updateTerm = new Term(tempId, name, start, end);
             repository.update(updateTerm);
-            Intent intent = new Intent(TermDetailsActivity.this, TermActivity.class);
 
+            Intent intent = new Intent(TermDetailsActivity.this, TermActivity.class);
+            intent.putExtra("termId", tempId);
+            intent.putExtra("termTitle", tempTitle);
+            intent.putExtra("termStartDate", tempStart);
+            intent.putExtra("termEndDate", tempEnd);
             startActivity(intent);
         }
 
