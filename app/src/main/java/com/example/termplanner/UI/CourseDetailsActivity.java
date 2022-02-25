@@ -34,9 +34,11 @@ import com.example.termplanner.Entities.Term;
 import com.example.termplanner.R;
 import com.example.termplanner.Repository.Repository;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -102,7 +104,6 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         repository = new Repository(getApplication());
 
 
-
         courseName = findViewById(R.id.courseDetailsName);
         startDate = findViewById(R.id.courseDetailsStartDate);
         endDate = findViewById(R.id.courseDetailsEndDate);
@@ -124,7 +125,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         }
 
 
-        termId = getIntent().getIntExtra("termId", -1 );
+        termId = getIntent().getIntExtra("termId", -1);
         tempTermId = termId;
         termTitle = getIntent().getStringExtra("termTitle");
         tempTermTitle = termTitle;
@@ -156,16 +157,16 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         tempNotes = notes;
         courseNotes.setEnabled(false);
         noteOption.setChecked(true);
-        if(notes.trim().isEmpty()){
+        if (notes.trim().isEmpty()) {
             noteOption.setChecked(false);
-            }else{
+        } else {
             courseNotes.setEnabled(true);
         }
 
         noteOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(noteOption.isChecked()){
+                if (noteOption.isChecked()) {
                     courseNotes.setEnabled(true);
                 } else {
                     courseNotes.setEnabled(false);
@@ -193,26 +194,19 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         instructorPhone.setText(phone);
 
 
-//
-//
-//        *****LinearLayoutManager horizontalLayoutManager
-//                = new LinearLayoutManager(TermDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView.setLayoutManager(horizontalLayoutManager);
         List<Assessment> assessmentsInCourse = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.course_with_assessments_recycler);
 
         final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
         recyclerView.setAdapter(assessmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        for(Assessment assessment : repository.getAllAssessments()){
-            if(assessment.getCourseId() == tempCourseId){
+        for (Assessment assessment : repository.getAllAssessments()) {
+            if (assessment.getCourseId() == tempCourseId) {
                 assessmentsInCourse.add(assessment);
             }
         }
         assessmentAdapter.setAssessments(assessmentsInCourse);
         assessmentsInCourseCount = assessmentsInCourse.size();
-
-
 
 
         //START DATE PICKER
@@ -353,5 +347,30 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         intent.putExtra("termEndDate", tempTermEnd);
         startActivity(intent);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.course_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.shareNote:
+                Intent notesIntent = new Intent();
+                notesIntent.setAction(Intent.ACTION_SEND);
+                notesIntent.putExtra(Intent.EXTRA_TEXT, courseNotes.getText().toString());
+                notesIntent.putExtra(Intent.EXTRA_TITLE, "Notes from - " + courseName.getText().toString());
+                notesIntent.setType("text/plain");
+                Intent noteIntentChooser = Intent.createChooser(notesIntent, null);
+                startActivity(noteIntentChooser);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
 

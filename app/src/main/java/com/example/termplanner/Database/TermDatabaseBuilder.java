@@ -13,7 +13,7 @@ import com.example.termplanner.Entities.Assessment;
 import com.example.termplanner.Entities.Course;
 import com.example.termplanner.Entities.Term;
 
-@Database(entities = {Assessment.class, Course.class, Term.class}, version = 12, exportSchema = false)
+@Database(entities = {Assessment.class, Course.class, Term.class}, version = 13, exportSchema = false)
 public abstract class TermDatabaseBuilder extends RoomDatabase {
 
     private static volatile TermDatabaseBuilder INSTANCE;

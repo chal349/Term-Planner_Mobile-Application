@@ -10,21 +10,21 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
-        android:layout_width="match_parent"
-        android:layout_height="336dp"
+        android:layout_width="366dp"
+        android:layout_height="300dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="306dp"
             android:background="@color/cardview_dark_background"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,35 +35,37 @@
                     android:id="@+id/courseDetailsName"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:ems="10"
+                    android:layout_centerInParent="true"
                     android:layout_weight="1"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:gravity="center"
                     android:hint="COURSE TITLE"
-                    android:textStyle="italic"
                     android:inputType="text"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
-                    android:gravity="center"
-                    android:layout_centerInParent="true"
-                    android:ellipsize="start"/>
+                    android:textStyle="italic" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="12dp">
 
                 <EditText
                     android:id="@+id/courseDetailsStartDate"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
                     android:background="@color/teal_700"
                     android:ellipsize="start"
                     android:ems="10"
                     android:gravity="center"
                     android:hint="START DATE"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="1"
                     android:inputType="date"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF" />
@@ -72,12 +74,12 @@
                     android:id="@+id/courseDetailsEndDate"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
                     android:background="@color/teal_700"
                     android:ellipsize="start"
-                    android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
-                    android:layout_marginLeft="4dp"
                     android:hint="END DATE"
                     android:inputType="date"
                     android:textColor="#FFFFFF"
@@ -88,43 +90,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingEnd="8dp">
 
                 <TextView
                     android:id="@+id/courseDetailsStatus"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
-                    android:ems="10"
-                    android:layout_weight="1"
-                    android:text="COURSE STATUS"
-                    android:inputType="text"
-                    android:layout_marginRight="4dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:gravity="center"
                     android:layout_centerInParent="true"
-                    android:ellipsize="start"/>
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:text="COURSE STATUS"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF" />
 
                 <Spinner
                     android:id="@+id/statusDetailsSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
-                    android:layout_weight="1"
                     android:layout_marginLeft="4dp"
-                    android:background="@color/cardview_light_background">
-                </Spinner>
+                    android:layout_weight="1"
+                    android:background="@color/cardview_light_background"></Spinner>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingEnd="8dp">
 
                 <CheckBox
                     android:id="@+id/optionalDetailsNoteCheckBox"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
                     android:layout_weight="2"
                     android:checked="false"
@@ -140,19 +141,18 @@
                 <EditText
                     android:id="@+id/courseDetailsNotes"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
-                    android:textStyle="italic"
-                    android:hint="Enter Notes..."
+                    android:layout_weight="1.5"
                     android:background="@color/cardview_light_background"
                     android:ems="10"
                     android:gravity="center"
-                    android:inputType="textMultiLine" />
+                    android:hint="Enter Notes..."
+                    android:inputType="textMultiLine"
+                    android:textStyle="italic" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -160,29 +160,29 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:layout_weight="4"
-                    android:text="INSTRUCTOR:"
-                    android:textStyle="italic"
-                    android:textColor="#FFFFFF"
-                    android:gravity="center"
                     android:layout_centerInParent="true"
-                    android:ellipsize="start"/>
+                    android:layout_weight="4"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:text="INSTRUCTOR:"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="italic" />
 
                 <EditText
                     android:id="@+id/instructorNameCourseDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:layout_centerInParent="true"
                     android:layout_weight="1"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:gravity="center"
                     android:hint="Enter Name"
-                    android:textStyle="italic"
                     android:inputType="textPersonName"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
-                    android:gravity="center"
-                    android:layout_centerInParent="true"
-                    android:ellipsize="start"/>
+                    android:textStyle="italic" />
             </LinearLayout>
 
             <LinearLayout
@@ -193,29 +193,29 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:layout_weight="2"
-                    android:text="Email:"
-                    android:textStyle="italic"
-                    android:textColor="#FFFFFF"
-                    android:gravity="center"
                     android:layout_centerInParent="true"
-                    android:ellipsize="start"/>
+                    android:layout_weight="2"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:text="Email:"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="italic" />
 
                 <EditText
                     android:id="@+id/instructorEmailCourseDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:layout_centerInParent="true"
                     android:layout_weight="1"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:gravity="center"
                     android:hint="Email Address"
-                    android:textStyle="italic"
                     android:inputType="textEmailAddress"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
-                    android:gravity="center"
-                    android:layout_centerInParent="true"
-                    android:ellipsize="start"/>
+                    android:textStyle="italic" />
             </LinearLayout>
 
             <LinearLayout
@@ -226,30 +226,30 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:layout_weight="2"
-                    android:text="Phone #:"
-                    android:textStyle="italic"
-                    android:textColor="#FFFFFF"
-                    android:gravity="center"
                     android:layout_centerInParent="true"
-                    android:ellipsize="start"/>
+                    android:layout_weight="2"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:text="Phone #:"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="italic" />
 
 
                 <EditText
                     android:id="@+id/instructorPhoneCourseDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:layout_centerInParent="true"
                     android:layout_weight="1"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:gravity="center"
                     android:hint="Phone Number"
-                    android:textStyle="italic"
                     android:inputType="phone"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
-                    android:gravity="center"
-                    android:layout_centerInParent="true"
-                    android:ellipsize="start"/>
+                    android:textStyle="italic" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -259,9 +259,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/assessments_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView3">
@@ -288,22 +290,48 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout6"
+        android:id="@+id/assessments_text"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginEnd="24dp"
-        android:orientation="vertical"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+        <TextView
+            android:id="@+id/assessments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ASSESSMENTS"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="244dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessments_text">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/course_with_assessments_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             tools:listitem="@layout/list_assessment" />
     </LinearLayout>
@@ -313,7 +341,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal"

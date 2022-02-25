@@ -2,7 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/delete_all_courses"
-        android:title="Delete all courses"
+        android:id="@+id/shareNote"
+        android:title="Share Notes"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/notifyAlert"
+        android:title="Create Alert"
         app:showAsAction="never"/>
 </menu>

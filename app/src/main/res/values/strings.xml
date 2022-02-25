@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Term Planner</string>
+    <string name="channel_name">channel</string>
+    <string name="channel_description">channelDescription</string>
 
     <string-array name="status">
         <item>In Progress</item>

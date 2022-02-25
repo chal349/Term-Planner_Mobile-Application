@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.example.termplanner.R;
 
 public class MainMenuActivity extends AppCompatActivity {
+    public static int numAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
