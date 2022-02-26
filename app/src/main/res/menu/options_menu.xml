@@ -6,7 +6,11 @@
         android:title="Share Notes"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/notifyAlert"
-        android:title="Create Alert"
+        android:id="@+id/notifyStartAlert"
+        android:title="Create Start Alert"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/notifyEndAlert"
+        android:title="Create End Alert"
         app:showAsAction="never"/>
 </menu>

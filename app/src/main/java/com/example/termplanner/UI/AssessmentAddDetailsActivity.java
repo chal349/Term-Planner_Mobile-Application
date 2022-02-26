@@ -1,5 +1,7 @@
 package com.example.termplanner.UI;
 
+import static com.example.termplanner.UI.TermDetailsActivity.tempId;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -196,7 +198,7 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
         String start = assessmentStartDate.getText().toString();
         String end = assessmentEndDate.getText().toString();
         String selection = "Objective Assessment";
-        if(performance.isChecked()){
+        if (performance.isChecked()) {
             selection = "Performance Assessment";
         }
 
@@ -215,41 +217,40 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
             alertDialog.show();
         }
 
-        if(tempAssessmentId != -1){
-            updateAssessment = new Assessment(tempAssessmentId, name, selection, start, end, tempCourseId, tempCourseTitle,
-                    tempCourseStart, tempCourseEnd, tempSpinner, tempSpinnerSelection, tempInstructorName, tempInstructorEmail,
-                    tempInstructorPhone, tempNotes, tempTermId, tempTermTitle, tempTermStart, tempTermEnd);
+        if (tempAssessmentId != -1) {
+            updateAssessment = new Assessment(tempAssessmentId, name, selection, start, end, tempCourseId, tempTermId);
             repository.update(updateAssessment);
-        }
-            else{
-            newAssessment = new Assessment(assessmentId, name, selection, start, end, tempCourseId, tempCourseTitle,
-                    tempCourseStart, tempCourseEnd, tempSpinner, tempSpinnerSelection, tempInstructorName, tempInstructorEmail,
-                    tempInstructorPhone, tempNotes, tempTermId, tempTermTitle, tempTermStart, tempTermEnd);
+        } else {
+            newAssessment = new Assessment(assessmentId, name, selection, start, end, tempCourseId, tempTermId);
             repository.insert(newAssessment);
         }
-
+        if (tempCourseId == -1 || tempCourseId != CourseDetailsActivity.tempCourseId) {
+            Intent intent = new Intent(AssessmentAddDetailsActivity.this, AssessmentActivity.class);
+            startActivity(intent);
+        } else {
             Intent intent = new Intent(AssessmentAddDetailsActivity.this, CourseDetailsActivity.class);
             intent.putExtra("courseId", tempCourseId);
             intent.putExtra("termId", tempTermId);
-            intent.putExtra("termTitle", tempTermTitle);
-            intent.putExtra("termStartDate", tempTermStart);
-            intent.putExtra("termEndDate", tempTermEnd);
-            intent.putExtra("courseTitle", tempCourseTitle);
-            intent.putExtra("courseStartDate", tempCourseStart);
-            intent.putExtra("courseEndDate", tempCourseEnd);
-            intent.putExtra("courseStatus", tempSpinner);
-            intent.putExtra("courseStatusSelection", tempSpinnerSelection);
-            intent.putExtra("courseNotes", tempNotes);
-            intent.putExtra("instructorName", tempInstructorName);
-            intent.putExtra("instructorEmail", tempInstructorEmail);
-            intent.putExtra("instructorPhone", tempInstructorPhone);
+            intent.putExtra("termTitle", TermDetailsActivity.tempTitle);
+            intent.putExtra("termStartDate", TermDetailsActivity.tempStart);
+            intent.putExtra("termEndDate", TermDetailsActivity.tempEnd);
+            intent.putExtra("courseTitle", CourseDetailsActivity.tempCourseTitle);
+            intent.putExtra("courseStartDate", CourseDetailsActivity.tempCourseStart);
+            intent.putExtra("courseEndDate", CourseDetailsActivity.tempCourseEnd);
+            intent.putExtra("courseStatus", CourseDetailsActivity.tempSpinner);
+            intent.putExtra("courseStatusSelection", CourseDetailsActivity.tempSpinnerSelection);
+            intent.putExtra("courseNotes", CourseDetailsActivity.tempNotes);
+            intent.putExtra("instructorName", CourseDetailsActivity.tempInstructorName);
+            intent.putExtra("instructorEmail", CourseDetailsActivity.tempInstructorEmail);
+            intent.putExtra("instructorPhone", CourseDetailsActivity.tempInstructorPhone);
             startActivity(intent);
 
+        }
     }
 
     public void DeleteAssessment(View view) {
         repository.delete(selectedAssessment);
-        Intent intent = new Intent(AssessmentAddDetailsActivity.this, CourseDetailsActivity.class);
+        Intent intent = new Intent(AssessmentAddDetailsActivity.this, TermDetailsActivity.class);
         intent.putExtra("courseId", tempCourseId);
         intent.putExtra("termId", tempTermId);
         intent.putExtra("termTitle", tempTermTitle);

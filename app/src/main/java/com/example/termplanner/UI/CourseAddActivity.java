@@ -197,7 +197,7 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
 
         } else {
 
-            newCourse = new Course(courseId, name, start, end, status, statusSelected, instructor, phone, email, noteContent, tempId, tempTitle, tempStart, tempEnd );
+            newCourse = new Course(courseId, name, start, end, status, statusSelected, instructor, phone, email, noteContent, tempId);
 
             repository.insert(newCourse);
 

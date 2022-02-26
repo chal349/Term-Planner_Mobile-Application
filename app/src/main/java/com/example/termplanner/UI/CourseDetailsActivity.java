@@ -18,7 +18,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,15 +26,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.termplanner.Adapters.AssessmentAdapter;
-import com.example.termplanner.Adapters.CourseAdapter;
 import com.example.termplanner.Entities.Assessment;
 import com.example.termplanner.Entities.Course;
-import com.example.termplanner.Entities.Term;
 import com.example.termplanner.R;
 import com.example.termplanner.Repository.Repository;
 
@@ -139,6 +135,11 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         termEnd = getIntent().getStringExtra("termEndDate");
         tempTermEnd = termEnd;
 
+//        Button addAssessmentButton = findViewById(R.id.addAssessment);
+//        if(TermDetailsActivity.tempId == -1 || tempId == 0 || tempId != tempTermId){
+//            addAssessmentButton.setVisibility(View.INVISIBLE);
+//        }
+
         String courseTitle = getIntent().getStringExtra("courseTitle");
         tempCourseTitle = courseTitle;
         String courseStartDate = getIntent().getStringExtra("courseStartDate");
@@ -160,12 +161,14 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 
         String notes = getIntent().getStringExtra("courseNotes");
         tempNotes = notes;
-        courseNotes.setEnabled(false);
-        noteOption.setChecked(true);
-        if (notes.trim().isEmpty()) {
+
+       // noteOption.setChecked(false);
+        if (tempNotes == null || tempNotes.trim().isEmpty()) {
+            courseNotes.setEnabled(false);
             noteOption.setChecked(false);
         } else {
             courseNotes.setEnabled(true);
+            noteOption.setChecked(true);
         }
 
         noteOption.setOnClickListener(new View.OnClickListener() {
@@ -209,6 +212,10 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
             if (assessment.getCourseId() == tempCourseId) {
                 assessmentsInCourse.add(assessment);
             }
+        }
+        TextView Assessments = findViewById(R.id.assessments);
+        if(assessmentsInCourse.size() < 1){
+            Assessments.setVisibility(View.INVISIBLE);
         }
         assessmentAdapter.setAssessments(assessmentsInCourse);
         assessmentsInCourseCount = assessmentsInCourse.size();
@@ -268,7 +275,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.course_menu, menu);
+        getMenuInflater().inflate(R.menu.options_menu, menu);
         return true;
     }
 
@@ -287,20 +294,35 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
                 Intent noteIntentChooser = Intent.createChooser(notesIntent, null);
                 startActivity(noteIntentChooser);
                 return true;
-            case R.id.notifyAlert:
-                String dateFromScreen = startDate.getText().toString();
-                Date myDate = null;
+            case R.id.notifyStartAlert:
+                String startDateFromScreen = startDate.getText().toString();
+                Date myStartDate = null;
                 try {
-                    myDate = sdf.parse(dateFromScreen);
+                    myStartDate = sdf.parse(startDateFromScreen);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Long trigger = myDate.getTime();
+                Long trigger = myStartDate.getTime();
                 Intent intent = new Intent(CourseDetailsActivity.this, Receiver.class);
                 intent.putExtra("key", courseName.getText().toString() + " starts today!");
                 PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsActivity.this, MainMenuActivity.numAlert++, intent, PendingIntent.FLAG_MUTABLE);
                 AlarmManager alarmManager = (AlarmManager)  getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                return true;
+            case R.id.notifyEndAlert:
+                String endDateFromScreen = endDate.getText().toString();
+                Date myEndDate = null;
+                try {
+                    myEndDate = sdf.parse(endDateFromScreen);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Long endTrigger = myEndDate.getTime();
+                Intent intentEnd = new Intent(CourseDetailsActivity.this, Receiver.class);
+                intentEnd.putExtra("key", courseName.getText().toString() + " ends today!");
+                PendingIntent senderEnd = PendingIntent.getBroadcast(CourseDetailsActivity.this, MainMenuActivity.numAlert++, intentEnd, PendingIntent.FLAG_MUTABLE);
+                AlarmManager alarmManagerEnd = (AlarmManager)  getSystemService(Context.ALARM_SERVICE);
+                alarmManagerEnd.set(AlarmManager.RTC_WAKEUP, endTrigger, senderEnd);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -347,32 +369,28 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
             alertDialog.show();
 
         } else {
-
-            if (termId != -1) {
-                updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, tempId, tempTitle, tempStart, tempEnd);
+                updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, tempTermId);
                 repository.update(updateCourse);
 
-                Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
+            if (tempId == -1 || tempId != tempTermId) {
+                Intent intent = new Intent(CourseDetailsActivity.this, CourseActivity.class);
+                startActivity(intent);
+            } else {
+            Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
                 intent.putExtra("termId", tempId);
                 intent.putExtra("termTitle", tempTitle);
                 intent.putExtra("termStartDate", tempStart);
                 intent.putExtra("termEndDate", tempEnd);
                 startActivity(intent);
-            }
-        }
-          if(termId == 0){
-                 updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, tempTermId, tempTermTitle, tempTermStart, tempTermEnd);
-                 repository.update(updateCourse);
+      }}
 
-                Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
-                startActivity(intent);
-        }
     }
 
     public void AddAssessment(View view) {
+
         Intent intent = new Intent(CourseDetailsActivity.this, AssessmentAddDetailsActivity.class);
         intent.putExtra("courseId", tempCourseId);
-        intent.putExtra("termId", tempId);
+        intent.putExtra("termId", tempTermId);
         intent.putExtra("termTitle", tempTitle);
         intent.putExtra("termStartDate", tempStart);
         intent.putExtra("termEndDate", tempEnd);
