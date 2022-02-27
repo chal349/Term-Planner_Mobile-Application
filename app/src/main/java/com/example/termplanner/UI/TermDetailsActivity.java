@@ -1,7 +1,10 @@
 package com.example.termplanner.UI;
 
+import static com.example.termplanner.UI.CourseDetailsActivity.assessmentsInCourseCount;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,6 +52,7 @@ public class TermDetailsActivity extends AppCompatActivity{
 
     DatePickerDialog.OnDateSetListener dateStartClick;
     DatePickerDialog.OnDateSetListener dateEndClick;
+    Term selectedTerm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,12 @@ public class TermDetailsActivity extends AppCompatActivity{
         // GET INTENTS
         int termID = getIntent().getIntExtra("termId", -1);
         tempId = termID;
+        List<Term> allTerms = repository.getAllTerms();
+        for (Term term : allTerms) {
+            if (term.getTermId() == termID) {
+                selectedTerm = term;
+            }
+        }
         String termTitle = getIntent().getStringExtra("termTitle");
         tempTitle = termTitle;
         String termStartDate = getIntent().getStringExtra("termStartDate");
@@ -84,6 +97,10 @@ public class TermDetailsActivity extends AppCompatActivity{
             if(course.getTermId() == tempId){
                 coursesInTerm.add(course);
             }
+        }
+        TextView coursesHeader = findViewById(R.id.courses);
+        if(coursesInTerm.size() < 1){
+            coursesHeader.setVisibility(View.INVISIBLE);
         }
         courseAdapter.setCourses(coursesInTerm);
         coursesInTermCount = coursesInTerm.size();
@@ -139,17 +156,10 @@ public class TermDetailsActivity extends AppCompatActivity{
             }
         });
 
-        //CANCEL BUTTON
-        Button cancelTermButton = findViewById(R.id.cancel_term_details_button);
-        cancelTermButton.setText("CANCEL");
-        cancelTermButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(TermDetailsActivity.this, TermActivity.class));
-
-            }
-        });
     }
+
+    ////////////////////////////////////////////////////On Create End
+
 
     public void saveTermDetails(View view) {
         int id;
@@ -197,6 +207,32 @@ public class TermDetailsActivity extends AppCompatActivity{
         intent.putExtra("termStartDate", tempStart);
         intent.putExtra("termEndDate", tempEnd);
         startActivity(intent);
+    }
+
+    public void DeleteTerm(View view) {
+        if (coursesInTermCount > 0) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Term has Courses assigned to it.\nCourses must be deleted before deleting a Term!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        } else {
+            repository.delete(selectedTerm);
+            Context context = getApplicationContext();
+            CharSequence text = termName.getText() + " has been deleted!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            Intent intent = new Intent(TermDetailsActivity.this, TermActivity.class);
+            startActivity(intent);
+        }
     }
 
 }

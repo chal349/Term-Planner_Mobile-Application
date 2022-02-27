@@ -28,6 +28,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.termplanner.Adapters.AssessmentAdapter;
 import com.example.termplanner.Entities.Assessment;
@@ -213,9 +214,9 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
                 assessmentsInCourse.add(assessment);
             }
         }
-        TextView Assessments = findViewById(R.id.assessments);
+        TextView assessmentsHeader = findViewById(R.id.assessments);
         if(assessmentsInCourse.size() < 1){
-            Assessments.setVisibility(View.INVISIBLE);
+            assessmentsHeader.setVisibility(View.INVISIBLE);
         }
         assessmentAdapter.setAssessments(assessmentsInCourse);
         assessmentsInCourseCount = assessmentsInCourse.size();
@@ -273,6 +274,9 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 
     }
 
+    ///////////////////////////////////On Create End
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
@@ -302,12 +306,12 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Long trigger = myStartDate.getTime();
-                Intent intent = new Intent(CourseDetailsActivity.this, Receiver.class);
-                intent.putExtra("key", courseName.getText().toString() + " starts today!");
-                PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsActivity.this, MainMenuActivity.numAlert++, intent, PendingIntent.FLAG_MUTABLE);
-                AlarmManager alarmManager = (AlarmManager)  getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                Long startTrigger = myStartDate.getTime();
+                Intent intentStart = new Intent(CourseDetailsActivity.this, Receiver.class);
+                intentStart.putExtra("key", courseName.getText().toString() + " starts today!");
+                PendingIntent senderStart = PendingIntent.getBroadcast(CourseDetailsActivity.this, MainMenuActivity.numAlert++, intentStart, PendingIntent.FLAG_MUTABLE);
+                AlarmManager alarmManagerStart = (AlarmManager)  getSystemService(Context.ALARM_SERVICE);
+                alarmManagerStart.set(AlarmManager.RTC_WAKEUP, startTrigger, senderStart);
                 return true;
             case R.id.notifyEndAlert:
                 String endDateFromScreen = endDate.getText().toString();
@@ -408,13 +412,39 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 
 
     public void DeleteCourse(View view) {
-        repository.delete(selectedCourse);
-        Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
-        intent.putExtra("termId", tempId);
-        intent.putExtra("termTitle", tempTitle);
-        intent.putExtra("termStartDate", tempStart);
-        intent.putExtra("termEndDate", tempEnd);
-        startActivity(intent);
+        if (assessmentsInCourseCount > 0) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Course has Assessments assigned to it.\nAssessments must be deleted before deleting a course!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        } else {
+            repository.delete(selectedCourse);
+            Context context = getApplicationContext();
+            CharSequence text = courseName.getText() + " has been deleted!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+            if (tempId == -1 || tempId != tempTermId) {
+                Intent intent = new Intent(CourseDetailsActivity.this, CourseActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(CourseDetailsActivity.this, TermDetailsActivity.class);
+                intent.putExtra("termId", tempId);
+                intent.putExtra("termTitle", tempTitle);
+                intent.putExtra("termStartDate", tempStart);
+                intent.putExtra("termEndDate", tempEnd);
+                startActivity(intent);
+            }
+        }
     }
 
 }
