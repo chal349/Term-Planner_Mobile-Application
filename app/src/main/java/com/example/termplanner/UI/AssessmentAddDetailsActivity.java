@@ -215,7 +215,7 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.notifyStartAlert:
-                String startDateFromScreen = assessmentStartDate.getText().toString();
+                String startDateFromScreen =  assessmentStartDate.getText().toString();
                 Date myStartDate = null;
                 try {
                     myStartDate = sdf.parse(startDateFromScreen);
