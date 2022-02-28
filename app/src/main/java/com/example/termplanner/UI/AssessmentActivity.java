@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.termplanner.Adapters.AssessmentAdapter;
 import com.example.termplanner.Adapters.CourseAdapter;
@@ -36,5 +38,10 @@ public class AssessmentActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         assessmentAdapter.setAssessments(allAssessments);
 
+        Context context = getApplicationContext();
+        CharSequence text = "To add an assessment, first select or create a term on the Terms screen";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }

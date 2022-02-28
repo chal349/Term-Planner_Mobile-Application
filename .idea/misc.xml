@@ -11,6 +11,15 @@
         <entry key="app/src/main/res/drawable/ic_baseline_subtitles_24.xml" value="0.228125" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.36354166666666665" />
         <entry key="app/src/main/res/drawable/ic_save.xml" value="0.3275" />
+        <entry key="app/src/main/res/layout-land/activity_add_course.xml" value="0.2998236331569665" />
+        <entry key="app/src/main/res/layout-land/activity_add_term.xml" value="0.2861552028218695" />
+        <entry key="app/src/main/res/layout-land/activity_assessment.xml" value="0.2861552028218695" />
+        <entry key="app/src/main/res/layout-land/activity_course.xml" value="0.2958553791887125" />
+        <entry key="app/src/main/res/layout-land/activity_details_add_assessment.xml" value="0.2861552028218695" />
+        <entry key="app/src/main/res/layout-land/activity_details_course.xml" value="0.29012345679012347" />
+        <entry key="app/src/main/res/layout-land/activity_details_term.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.2861552028218695" />
+        <entry key="app/src/main/res/layout-land/activity_term.xml" value="0.2958553791887125" />
         <entry key="app/src/main/res/layout/activity_add_course.xml" value="0.2817028985507246" />
         <entry key="app/src/main/res/layout/activity_add_term.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_assessment.xml" value="0.3052536231884058" />
