@@ -40,6 +40,8 @@
         <entry key="app/src/main/res/menu/add_course_menu.xml" value="0.2796296296296296" />
         <entry key="app/src/main/res/menu/course_menu.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/options_menu.xml" value="0.36770833333333336" />
+        <entry key="app/src/main/res/menu/search.xml" value="0.3380208333333333" />
+        <entry key="app/src/main/res/menu/search_menu.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/menu/test_menu.xml" value="0.5" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.173" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.173" />
