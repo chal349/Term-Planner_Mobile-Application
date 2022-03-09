@@ -108,7 +108,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> im
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for(Term term : termsListFull){
-                    if(term.getTitle().toLowerCase().contains(filterPattern)){
+                    if(term.getTitle().toLowerCase().contains(filterPattern) || term.getStartDate().contains(filterPattern) || term.getEndDate().contains(filterPattern)){
                         filteredList.add(term);
                     }
                 }

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,24 +14,21 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.termplanner.Entities.Assessment;
+import com.example.termplanner.Entities.Course;
 import com.example.termplanner.R;
 import com.example.termplanner.UI.AssessmentAddDetailsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.ViewHolder> {
+public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.ViewHolder> implements Filterable {
+
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView title;
         private final TextView date;
         private final TextView type;
-
-        //   private final status;
-        //   private String instructorName;
-        //   private String instructorPhone;
-        //  private String instructorEmail;
-        //   private String noteTitle;
-        //  private String noteContent;
 
         private ViewHolder(View itemView) {
             super(itemView);
@@ -61,10 +60,13 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
     private final LayoutInflater inflater;
     private final Context context;
     private List<Assessment> assessmentList;
+    private List<Assessment> assessmentListFull;
 
-    public AssessmentAdapter(Context context) {
+    public AssessmentAdapter(Context context, List<Assessment> assessmentList) {
         inflater = LayoutInflater.from(context);
         this.context = context;
+        this.assessmentList = assessmentList;
+        assessmentListFull = new ArrayList<>(assessmentList);
     }
 
     @NonNull
@@ -98,4 +100,38 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
     public int getItemCount() {
         return assessmentList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return assessmentFilter;
+    }
+
+    private Filter assessmentFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Assessment> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0) {
+                filteredList.addAll(assessmentListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(Assessment assessment : assessmentListFull){
+                    if(assessment.getAssessmentTitle().toLowerCase().contains(filterPattern) || assessment.getAssessmentStartDate().contains(filterPattern) || assessment.getAssessmentEndDate().contains(filterPattern)){
+                        filteredList.add(assessment);
+                    }
+                }
+            } FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            assessmentList.clear();
+            assessmentList.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 }

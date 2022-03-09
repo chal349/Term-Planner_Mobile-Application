@@ -206,7 +206,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         List<Assessment> assessmentsInCourse = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.course_with_assessments_recycler);
 
-        final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
+        final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this, assessmentsInCourse);
         recyclerView.setAdapter(assessmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         for (Assessment assessment : repository.getAllAssessments()) {

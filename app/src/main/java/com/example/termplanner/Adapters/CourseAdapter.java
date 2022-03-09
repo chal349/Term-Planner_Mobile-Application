@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,13 +14,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.termplanner.Entities.Course;
+import com.example.termplanner.Entities.Term;
 import com.example.termplanner.R;
 import com.example.termplanner.UI.CourseDetailsActivity;
 import com.example.termplanner.UI.TermDetailsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> implements Filterable {
+
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView title;
@@ -57,10 +63,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     private final LayoutInflater inflater;
     private final Context context;
     private List<Course> courseList;
+    private List<Course> courseListFull;
 
-    public CourseAdapter(Context context) {
+    public CourseAdapter(Context context, List<Course> courseList) {
         inflater = LayoutInflater.from(context);
         this.context = context;
+        this.courseList = courseList;
+        courseListFull = new ArrayList<>(courseList);
     }
 
     @NonNull
@@ -92,4 +101,38 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     public int getItemCount() {
         return courseList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return courseFilter;
+    }
+
+    private Filter courseFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Course> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0) {
+                filteredList.addAll(courseListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(Course course : courseListFull){
+                    if(course.getCourseTitle().toLowerCase().contains(filterPattern) || course.getCourseStartDate().contains(filterPattern) || course.getCourseEndDate().contains(filterPattern)){
+                        filteredList.add(course);
+                    }
+                }
+            } FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            courseList.clear();
+            courseList.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 }

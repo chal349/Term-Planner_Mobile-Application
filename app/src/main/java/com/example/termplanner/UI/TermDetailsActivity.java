@@ -90,7 +90,7 @@ public class TermDetailsActivity extends AppCompatActivity{
         List<Course> coursesInTerm = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.term_with_courses_recycler);
 
-        final CourseAdapter courseAdapter = new CourseAdapter(this);
+        final CourseAdapter courseAdapter = new CourseAdapter(this, coursesInTerm);
         recyclerView.setAdapter(courseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         for(Course course : repository.getAllCourses()){
