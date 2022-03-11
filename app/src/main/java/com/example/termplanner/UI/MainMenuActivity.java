@@ -49,6 +49,16 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        Button reportsButton = findViewById(R.id.reportsBtn);
+        reportsButton.setText("REPORTS");
+        reportsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainMenuActivity.this, ReportActivity.class));
+
+            }
+        });
+
 
     }
 }

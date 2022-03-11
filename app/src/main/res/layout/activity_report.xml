@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="UI.ReportActivity"
+    android:background="@color/black">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1,2,3"
+        android:layout_margin="24dp"
+        android:background="@color/teal_700">
+
+        <TableRow>
+            <TextView
+                android:text="TITLE"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
+                android:padding="4dp"
+                android:gravity="center"
+                android:layout_column="1"/>
+
+            <TextView
+                android:text="STATUS"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
+                android:padding="4dp"
+                android:gravity="center"
+                android:layout_column="1"/>
+
+            <TextView
+                android:text="DATE CREATED"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
+                android:padding="4dp"
+                android:gravity="center"
+                android:layout_column="1"/>
+
+        </TableRow>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/report_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:clipToPadding="false"
+            tools:listitem="@layout/list_report" />
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

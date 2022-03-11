@@ -58,6 +58,10 @@
             android:exported="false"
             android:parentActivityName=".UI.TermActivity" />
         <activity
+            android:name=".UI.ReportActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.MainMenuActivity" />
+        <activity
             android:name=".UI.MainMenuActivity"
             android:exported="true"/>
 

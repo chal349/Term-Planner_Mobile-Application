@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
             alertDialog.show();
-        } else if (username.equals(validUser) || password.equals(validPassword)) {
+        } else if (username.equals(validUser) && password.equals(validPassword)) {
             Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
             startActivity(intent);
         }

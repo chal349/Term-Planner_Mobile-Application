@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:id="@+id/report_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1,2,3"
+        android:background="@color/cardview_dark_background">
+
+        <TableRow>
+            <TextView
+                android:id="@+id/report_title"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:padding="4dp"
+                android:gravity="center"
+                android:layout_column="1"/>
+
+            <TextView
+                android:id="@+id/report_date"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:padding="4dp"
+                android:gravity="center"
+                android:layout_column="1"/>
+
+            <TextView
+                android:id="@+id/report_create_date"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:padding="4dp"
+                android:gravity="center"
+                android:layout_column="1"/>
+
+        </TableRow>
+
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

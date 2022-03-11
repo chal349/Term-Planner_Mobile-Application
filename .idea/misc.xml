@@ -31,13 +31,17 @@
         <entry key="app/src/main/res/layout/activity_details_term.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_report.xml" value="0.353713768115942" />
         <entry key="app/src/main/res/layout/activity_term.xml" value="0.375" />
         <entry key="app/src/main/res/layout/course_item.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/editor_term.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_assessment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/list_course.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/list_report.xml" value="0.353713768115942" />
         <entry key="app/src/main/res/layout/list_term.xml" value="0.33" />
         <entry key="app/src/main/res/layout/note_item.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.353713768115942" />
+        <entry key="app/src/main/res/layout/testmain.xml" value="0.353713768115942" />
         <entry key="app/src/main/res/menu/add_course_menu.xml" value="0.2796296296296296" />
         <entry key="app/src/main/res/menu/course_menu.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/options_menu.xml" value="0.36770833333333336" />
