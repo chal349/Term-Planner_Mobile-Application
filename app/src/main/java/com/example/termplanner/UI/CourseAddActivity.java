@@ -25,6 +25,7 @@ import com.example.termplanner.Repository.Repository;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -178,6 +179,8 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         String phone = instructorPhone.getText().toString();
         String email = instructorEmail.getText().toString();
         String noteContent = courseNotes.getText().toString();
+        Date now = Calendar.getInstance().getTime();
+        String createdDate = now.toString();
 
         if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() ||
             status.isEmpty() || instructor.trim().isEmpty() || phone.trim().isEmpty() ||
@@ -197,7 +200,7 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
 
         } else {
 
-            newCourse = new Course(courseId, name, start, end, status, statusSelected, instructor, phone, email, noteContent, tempId);
+            newCourse = new Course(courseId, name, start, end, status, statusSelected, instructor, phone, email, noteContent, createdDate, tempId);
 
             repository.insert(newCourse);
 

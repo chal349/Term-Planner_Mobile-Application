@@ -50,7 +50,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
             final Course current = courseList.get(position);
             holder.title.setText(current.getCourseTitle());
             holder.date.setText(current.getCourseStatus());
-            holder.createDate.setText(current.getCourseStartDate());
+            holder.createDate.setText(current.getCreatedDate());
         }
         else{
             holder.title.setText(" ");

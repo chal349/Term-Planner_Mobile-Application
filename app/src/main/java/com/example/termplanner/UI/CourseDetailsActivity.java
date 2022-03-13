@@ -136,10 +136,6 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         termEnd = getIntent().getStringExtra("termEndDate");
         tempTermEnd = termEnd;
 
-//        Button addAssessmentButton = findViewById(R.id.addAssessment);
-//        if(TermDetailsActivity.tempId == -1 || tempId == 0 || tempId != tempTermId){
-//            addAssessmentButton.setVisibility(View.INVISIBLE);
-//        }
 
         String courseTitle = getIntent().getStringExtra("courseTitle");
         tempCourseTitle = courseTitle;
@@ -354,6 +350,8 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         String phone = instructorPhone.getText().toString();
         String email = instructorEmail.getText().toString();
         String noteContent = courseNotes.getText().toString();
+        Date now = Calendar.getInstance().getTime();
+        String createdDate = now.toString();
 
 
         if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() ||
@@ -373,7 +371,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
             alertDialog.show();
 
         } else {
-                updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, tempTermId);
+                updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, createdDate, tempTermId);
                 repository.update(updateCourse);
 
             if (tempId == -1 || tempId != tempTermId) {

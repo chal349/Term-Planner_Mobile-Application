@@ -17,12 +17,13 @@ public class Course {
     private String instructorPhone;
     private String instructorEmail;
     private String noteContent;
+    private String createdDate;
     private int termId;
 
 
     public Course(int courseId, String courseTitle, String courseStartDate, String courseEndDate, String courseStatus,
                   int courseStatusSelection, String instructorName, String instructorPhone, String instructorEmail,
-                  String noteContent, int termId) {
+                  String noteContent, String createdDate, int termId) {
 
         this.courseId = courseId;
         this.courseTitle = courseTitle;
@@ -34,6 +35,7 @@ public class Course {
         this.instructorPhone = instructorPhone;
         this.instructorEmail = instructorEmail;
         this.noteContent = noteContent;
+        this.createdDate = createdDate;
         this.termId = termId;
 
     }
@@ -115,7 +117,15 @@ public class Course {
     }
 
     public void setNoteContent(String noteContent) {
-        this.noteContent = noteContent;
+        this.createdDate = createdDate;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
     public int getTermId() {
