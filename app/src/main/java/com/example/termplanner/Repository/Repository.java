@@ -5,10 +5,12 @@ import android.app.Application;
 import com.example.termplanner.DAO.AssessmentDao;
 import com.example.termplanner.DAO.CourseDao;
 import com.example.termplanner.DAO.TermDao;
+import com.example.termplanner.DAO.UserDao;
 import com.example.termplanner.Database.TermDatabaseBuilder;
 import com.example.termplanner.Entities.Assessment;
 import com.example.termplanner.Entities.Course;
 import com.example.termplanner.Entities.Term;
+import com.example.termplanner.Entities.User;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -19,9 +21,11 @@ public class Repository {
     private AssessmentDao assessmentDao;
     private CourseDao courseDao;
     private TermDao termDao;
+    private UserDao userDao;
     private List<Assessment> allAssessments;
     private List<Course> allCourses;
     private List<Term> allTerms;
+    private List<User> allUsers;
 
     private static int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
@@ -31,6 +35,7 @@ public class Repository {
         assessmentDao = termDatabaseBuilder.assessmentDao();
         courseDao = termDatabaseBuilder.courseDao();
         termDao = termDatabaseBuilder.termDao();
+        userDao = termDatabaseBuilder.userDao();
     }
 
 
@@ -156,5 +161,45 @@ public class Repository {
             e.printStackTrace();
         }
         return allTerms;
+    }
+
+    // USERS
+
+    public void insert(User user){
+        databaseExecutor.execute(()-> userDao.insert(user));
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void update(User user){
+        databaseExecutor.execute(()-> userDao.update(user));
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(User user){
+        databaseExecutor.execute(()-> userDao.delete(user));
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public List<User> getAllUsers() {
+        databaseExecutor.execute(() -> allUsers = userDao.getAllUsers());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return allUsers;
     }
 }

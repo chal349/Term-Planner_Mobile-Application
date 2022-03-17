@@ -68,4 +68,5 @@
             android:clipToPadding="false"
             tools:listitem="@layout/list_report" />
     </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

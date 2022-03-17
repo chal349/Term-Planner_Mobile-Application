@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_subtitles_24.xml" value="0.228125" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.36354166666666665" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2505" />
+        <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.222" />
         <entry key="app/src/main/res/drawable/ic_save.xml" value="0.3275" />
         <entry key="app/src/main/res/layout-land/activity_add_course.xml" value="0.2998236331569665" />
         <entry key="app/src/main/res/layout-land/activity_add_term.xml" value="0.2861552028218695" />
@@ -44,6 +45,7 @@
         <entry key="app/src/main/res/layout/testmain.xml" value="0.353713768115942" />
         <entry key="app/src/main/res/menu/add_course_menu.xml" value="0.2796296296296296" />
         <entry key="app/src/main/res/menu/course_menu.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/menu/logout_menu.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/menu/options_menu.xml" value="0.36770833333333336" />
         <entry key="app/src/main/res/menu/search.xml" value="0.3380208333333333" />
         <entry key="app/src/main/res/menu/search_menu.xml" value="0.3380208333333333" />

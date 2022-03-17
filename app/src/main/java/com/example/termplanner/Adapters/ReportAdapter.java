@@ -55,7 +55,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         else{
             holder.title.setText(" ");
             holder.date.setText(" ");
-
+            holder.createDate.setText(" ");
         }
     }
 
