@@ -9,7 +9,7 @@ public class TermTest {
 
     public static int termId = 0;
     public static String termTitle = "Term Test";
-    public static String termTitleTooLong = "TermToManyCharacters";
+    public static String termTitleTooLong = "TermTitleTooManyCharacters";
     public static String validStart = "03/29/2022";
     public static String validEnd = "03/30/2022";
     public static String invalidStartFormat = "";
