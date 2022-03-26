@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.example.termplanner.Util.DateValidator;
+
 @Entity(tableName = "term_table")
 
 public class Term {
@@ -53,4 +55,26 @@ public class Term {
     }
 
     public void setEndDate(String endDate) { this.endDate = endDate; }
+
+
+    //FOR JUNIT TESTING
+    public boolean validTermInput(String title, String startDate, String endDate){
+
+        DateValidator validator = new DateValidator();
+        int MAX_LENGTH = 14;
+
+        if (title.isEmpty() || startDate.isEmpty() || endDate.isEmpty()){
+            return false;
+        }
+        if (title.length() > MAX_LENGTH){
+            return false;
+        }
+        if (!validator.isDateValid(startDate) && validator.isDateValid(endDate)){
+            return false;
+        }
+        if (!validator.isDateOrderValid(startDate, endDate)){
+            return false;
+        }
+        return true;
+    }
 }
