@@ -35,6 +35,7 @@ import com.example.termplanner.Entities.Assessment;
 import com.example.termplanner.Entities.Course;
 import com.example.termplanner.R;
 import com.example.termplanner.Repository.Repository;
+import com.example.termplanner.Util.DateValidator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -342,6 +343,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 
     public void saveCourseDetails(View view) {
 
+        DateValidator validator = new DateValidator();
         Course updateCourse;
         String name = courseName.getText().toString();
         String start = startDate.getText().toString();
@@ -352,7 +354,6 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         String noteContent = courseNotes.getText().toString();
         Date now = Calendar.getInstance().getTime();
         String createdDate = now.toString();
-
 
         if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() ||
                 spinnerValue.isEmpty() || instructor.trim().isEmpty() || email.trim().isEmpty() ||
@@ -369,8 +370,37 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
                         }
                     });
             alertDialog.show();
+        }
+        else if (!validator.isDateValid(start) || !validator.isDateValid(end)) {
 
-        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Date must be formatted mm/dd/yyyy!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+
+
+        } else if (!validator.isDateOrderValid(start, end)) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Start date must be before End date!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+        else {
                 updateCourse = new Course(courseId, name, start, end, spinnerValue, spinnerSelectionPosition, instructor, phone, email, noteContent, createdDate, tempTermId);
                 repository.update(updateCourse);
 

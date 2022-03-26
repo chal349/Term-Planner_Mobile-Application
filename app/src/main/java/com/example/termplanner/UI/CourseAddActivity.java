@@ -16,12 +16,14 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.termplanner.Entities.Course;
 import com.example.termplanner.R;
 import com.example.termplanner.Repository.Repository;
+import com.example.termplanner.Util.DateValidator;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -171,6 +173,7 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void saveCourse(View view) {
+        DateValidator validator = new DateValidator();
         Course newCourse;
         String name = courseName.getText().toString();
         String start = startDate.getText().toString();
@@ -183,8 +186,8 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
         String createdDate = now.toString();
 
         if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() ||
-            status.isEmpty() || instructor.trim().isEmpty() || phone.trim().isEmpty() ||
-            email.trim().isEmpty()) {
+                status.isEmpty() || instructor.trim().isEmpty() || phone.trim().isEmpty() ||
+                email.trim().isEmpty()) {
 
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
             alertDialog.setTitle("Alert");
@@ -197,33 +200,66 @@ public class CourseAddActivity extends AppCompatActivity implements AdapterView.
                         }
                     });
             alertDialog.show();
+        }
 
-        } else {
+        else if (!validator.isDateValid(start) || !validator.isDateValid(end)) {
 
-            newCourse = new Course(courseId, name, start, end, status, statusSelected, instructor, phone, email, noteContent, createdDate, tempId);
+                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle("Alert");
+                alertDialog.setMessage("Date must be formatted mm/dd/yyyy!");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                alertDialog.show();
 
-            repository.insert(newCourse);
 
-            Intent intent = new Intent(CourseAddActivity.this, TermDetailsActivity.class);
-            intent.putExtra("termId", tempId);
-            intent.putExtra("termTitle", tempTitle);
-            intent.putExtra("termStartDate", tempStart);
-            intent.putExtra("termEndDate", tempEnd);
-            startActivity(intent);
+            } else if (!validator.isDateOrderValid(start, end)) {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Start date must be before End date!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+                else {
+
+
+                newCourse = new Course(courseId, name, start, end, status, statusSelected, instructor, phone, email, noteContent, createdDate, tempId);
+
+                repository.insert(newCourse);
+
+                Intent intent = new Intent(CourseAddActivity.this, TermDetailsActivity.class);
+                intent.putExtra("termId", tempId);
+                intent.putExtra("termTitle", tempTitle);
+                intent.putExtra("termStartDate", tempStart);
+                intent.putExtra("termEndDate", tempEnd);
+                startActivity(intent);
+
+
 
         }
     }
 
-    //STATUS SPINNER SELECTION
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        status = parent.getItemAtPosition(position).toString();
-        statusSelected = parent.getSelectedItemPosition();
-    }
+            //STATUS SPINNER SELECTION
+            @Override
+            public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
+                status = parent.getItemAtPosition(position).toString();
+                statusSelected = parent.getSelectedItemPosition();
+            }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected (AdapterView < ? > adapterView){
 
-    }
+            }
 
-}
+        }

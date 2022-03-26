@@ -25,6 +25,7 @@ import com.example.termplanner.Entities.Assessment;
 import com.example.termplanner.Entities.Course;
 import com.example.termplanner.R;
 import com.example.termplanner.Repository.Repository;
+import com.example.termplanner.Util.DateValidator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -250,6 +251,7 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
 
     public void saveAssessment(View view) {
 
+        DateValidator validator = new DateValidator();
         Assessment updateAssessment;
         Assessment newAssessment;
         String name = assessmentTitle.getText().toString();
@@ -275,7 +277,37 @@ public class AssessmentAddDetailsActivity extends AppCompatActivity {
             alertDialog.show();
         }
 
-        if (tempAssessmentId != -1) {
+        else if (!validator.isDateValid(start) || !validator.isDateValid(end)) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Date must be formatted mm/dd/yyyy!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+
+
+        } else if (!validator.isDateOrderValid(start, end)) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Start date must be before End date!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+            return;
+        }
+        else if (tempAssessmentId != -1) {
             updateAssessment = new Assessment(tempAssessmentId, name, selection, start, end, tempCourseId, tempTermId);
             repository.update(updateAssessment);
         } else {

@@ -26,6 +26,7 @@ import com.example.termplanner.Entities.Course;
 import com.example.termplanner.Entities.Term;
 import com.example.termplanner.R;
 import com.example.termplanner.Repository.Repository;
+import com.example.termplanner.Util.DateValidator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -162,11 +163,11 @@ public class TermDetailsActivity extends AppCompatActivity{
 
 
     public void saveTermDetails(View view) {
-        int id;
+
+        DateValidator validator = new DateValidator();
         String name = termName.getText().toString();
         String start = startDate.getText().toString();
         String end = endDate.getText().toString();
-        //   int termID = termId;
         Term updateTerm;
 
         if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty()) {
@@ -183,9 +184,36 @@ public class TermDetailsActivity extends AppCompatActivity{
                     });
             alertDialog.show();
 
-        } else {
-//            List<Term> allTerms = repository.getAllTerms();
-//            id = allTerms.get(allTerms.size() - 1).getTermId();
+        } else if (!validator.isDateValid(start) || !validator.isDateValid(end)) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Date must be formatted mm/dd/yyyy!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+
+
+        } else if (!validator.isDateOrderValid(start, end)) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Start date must be before End date!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+        else {
 
             updateTerm = new Term(tempId, name, start, end);
             repository.update(updateTerm);
