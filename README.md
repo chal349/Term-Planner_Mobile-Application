@@ -17,4 +17,5 @@ Menu options for all three edit screens of term, course, and assessment allow th
 
 &NBSP
 
-[Corey_Hall_Term-Planner-Diagram.pdf](https://github.com/chal349/Term-Planner_Mobile-Application/files/8958854/Corey_Hall_Term-Planner-Diagram.pdf)
+
+![Corey_Hall_Term-Planner-Diagram](https://user-images.githubusercontent.com/79333726/175063165-4311d751-9b79-4fb8-8732-a7c8719ec23a.png)
