@@ -17,4 +17,6 @@ Menu options for all three edit screens of term, course, and assessment allow th
 
 &nbsp
 
-![79333726](https://user-images.githubusercontent.com/79333726/175063427-dd85446e-77e2-4c41-b196-5d0ed22f6a8e.png)
+
+
+![Corey_Hall_Term-Planner-Diagram](https://user-images.githubusercontent.com/79333726/175064018-713a1a21-457c-40e5-a4e4-2b67fc73e780.png)
