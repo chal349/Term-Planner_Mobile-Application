@@ -19,6 +19,7 @@ Menu options for all three edit screens of term, course, and assessment allow th
 * For courses and assessments, the user can set alerts for the start and end dates of the course or assessment. These alerts will appear even if the application is closed. 
 * The Course screen also allows the user an option to share notes via Email or SMS.
 
+----------------------
 
 ![Corey_Hall_Term-Planner-Diagram](https://user-images.githubusercontent.com/79333726/175064018-713a1a21-457c-40e5-a4e4-2b67fc73e780.png)
 
